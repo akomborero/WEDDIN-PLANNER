@@ -1,0 +1,58 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 30px;
+  padding-right: 28px;
+  padding-bottom: 30px;
+  padding-left: 28px;
+  
+  background: #fff;
+  color: #7F4446;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.navbar-logo img {
+  height: 40px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.navbar-links li a:hover {
+  color: #7F4446; /* Accent color */
+}
+
+.navbar-book .book-now-btn {
+ width: 176px;
+ height: 69px;
+  background: #7F4446;
+  color: #fff;
+  border: none;
+  padding-top:20px ;
+  padding-right: 30px;
+  padding-bottom: 20px;
+  gap: 10px;
+  padding-left: 30px;
+  border-radius: 10px;
+  text-decoration: none;
+ 
+  box-shadow: 0 2px 6px rgba(215,38,61,0.08);
+  transition: background 0.2s;
+}
+
+.navbar-book .book-now-btn:hover {
+  background: #00000040;
+}

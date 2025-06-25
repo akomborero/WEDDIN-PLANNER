@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* --- Global Box Sizing (Good Practice) --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* --- Consistent Content Wrapper --- */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px; /* Adjusted padding as per previous discussion */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- Hero Section Styling --- */
+.hero-section {
+    width: 100%;
+    min-height: 100vh; /* Now covers the full screen height */
+    background: #faf6f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Hero Content (Text & Mission Statement) Styling --- */
+.hero-content {
+    flex: 1;
+    max-width: 50%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 30px;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 3.2rem;
+    color: #222;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.hero-content h1 .lifetime-text {
+    font-family: 'Allura', cursive;
+    font-size: 2.2rem;
+    color: #7F4446;
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: baseline;
+    line-height: 1;
+}
+
+.mission-statement {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #444;
+    line-height: 1.6;
+    font-weight: 400;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+    margin-top: 0;
+}
+
+/* --- Carousel Container Styling --- */
+.hero-carousel-container {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.hero-carousel-container .slick-slider {
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Styles for individual carousel slides */
+.hero-carousel-container .carousel-slide-item {
+    padding: 0 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.hero-carousel-container .carousel-slide-item img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.4s ease-in-out;
+    
+    /* Make non-active slides smaller and slightly faded */
+    transform: scale(0.7); /* Adjusted scale as per discussion */
+    opacity: 0.6;
+}
+
+/* Style the currently active (center) image */
+.hero-carousel-container .slick-center .carousel-slide-item img {
+    transform: scale(1.15); /* Makes the active slide 15% bigger */
+    opacity: 1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* Slick dots and arrows default styling adjustments */
+.hero-carousel-container .slick-dots {
+    bottom: -30px;
+}
+.hero-carousel-container .slick-dots li button:before {
+    font-size: 10px;
+    color: #7F4446;
+}
+.hero-carousel-container .slick-dots li.slick-active button:before {
+    color: #7F4446;
+}
+
+.hero-carousel-container .slick-prev:before,
+.hero-carousel-container .slick-next:before {
+    color: #7F4446;
+    font-size: 30px;
+}
+.hero-carousel-container .slick-prev {
+    left: -40px;
+    z-index: 1;
+}
+.hero-carousel-container .slick-next {
+    right: -40px;
+    z-index: 1;
+}
+
+/* --- Button Container --- */
+.button-container {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: left;
+}
+
+/* --- General Button Styles --- */
+.btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 2px solid;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* --- Primary Button (Accent Color) --- */
+.primary-btn {
+    background-color: #7F4446;
+    color: #fff;
+    border-color: #7F4446;
+}
+
+.primary-btn:hover {
+    background-color: #fff;
+    color: #7F4446;
+    border-color: #7F4446;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* --- New Section: Image-Content-Image Layout --- */
+.image-content-section {
+    background-color: #D3C1C1;
+    width: 100%;
+    min-height: 100vh; /* Now covers the full screen height */
+    display: flex; /* Make it a flex container */
+    align-items: center; /* Vertically center its content */
+    justify-content: center; /* Horizontally center its content */
+    /* Remove padding here, as the inner .content-wrapper will handle it */
+}
+.image-content-section .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.image-content-left,
+.image-content-right {
+    flex-basis: 25%;
+    max-width: 250px;
+    text-align: center;
+}
+
+.image-content-left img,
+.image-content-right img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.image-content-center {
+    flex-grow: 1;
+    flex-basis: 45%;
+    max-width: 600px;
+    text-align: left; /* <--- CHANGED TO LEFT */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+.image-content-center h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.image-content-center h1 {
+    font-family: 'Allura', cursive;
+    font-size: 2rem;
+    color: #7F4446;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.image-content-center p { /* <<< UPDATED RULE FOR P TAG */
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+
+@media (max-width: 992px) {
+    .content-wrapper {
+        padding: 2rem 3vw;
+        max-width: 90%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-section {
+        min-height: unset;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-right: 0;
+    }
+    .hero-content h1 {
+        font-size: 2.6rem;
+    }
+    .hero-content h1 .lifetime-text {
+        font-size: 1.9rem;
+        margin-left: 8px;
+    }
+    .mission-statement {
+        font-size: 1.1rem;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-carousel-container {
+        max-width: 80%;
+        padding-left: 0;
+    }
+
+    .hero-carousel-container .slick-slider {
+        max-width: 100%;
+    }
+
+    .hero-carousel-container .carousel-slide-item img {
+        height: 300px;
+        transform: scale(1);
+        opacity: 1;
+    }
+    .hero-carousel-container .slick-center .carousel-slide-item img {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    .button-container {
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .btn {
+        padding: 0.9rem 2.2rem;
+        font-size: 1.05rem;
+    }
+
+    /* Responsive Adjustments for this New Section */
+    .image-content-section .content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 30px;
+    }
+    .image-content-left,
+    .image-content-right,
+    .image-content-center {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    .image-content-center {
+        padding: 15px;
+    }
+    .image-content-center h2 {
+        font-size: 2rem;
+    }
+    .image-content-center h1 {
+        font-size: 1.7rem;
+    }
+    .image-content-center p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-wrapper {
+        padding: 1.5rem 2vw;
+        max-width: 100%;
+    }
+
+    .hero-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .hero-content h1 .lifetime-text {
+        font-size: 1.5rem;
+    }
+    .mission-statement {
+        font-size: 1rem;
+    }
+
+    .hero-carousel-container {
+        max-width: 95%;
+    }
+
+    .hero-carousel-container .carousel-slide-item img {
+        height: 250px;
+    }
+
+    .button-container {
+        margin-top: 1.8rem;
+        text-align: center;
+    }
+    .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+
+    /* Responsive Adjustments for this New Section */
+    .image-content-section {
+        padding: 50px 0;
+    }
+    .image-content-section .content-wrapper {
+        gap: 20px;
+        padding: 0 20px;
+    }
+    .image-content-left img,
+    .image-content-right img {
+        height: 250px;
+    }
+    .image-content-center h1 {
+        font-size: 1.4rem;
+    }
+}
+
+
+
+
+
+/*Third section */
+
+/* --- New Section: Call to Action --- */
+.cta-section {
+   
+    background-image: url('https://images.pexels.com/photos/6490277/pexels-photo-6490277.jpeg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh; /* Now covers the full screen height */
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* --- CTA Content (Now the Card) --- */
+.cta-section .cta-content {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white card background */
+    padding: 35px; /* Padding inside the card */
+    border-radius: 10px; /* Rounded corners for the card */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Shadow for depth */
+    max-width: 450px; /* Max width for readability of card content */
+    width: 90%; /* Responsive width */
+    text-align: left; /* Text inside the card is left-aligned */
+    color: #222; /* Dark text color for contrast on light card */
+
+    /* Positioning the card to the bottom-left */
+    position: absolute; 
+    bottom: 50px; /* Distance from the bottom edge of the section */
+    right: 100px; /* Distance from the left edge of the section */
+    z-index: 2; /* Ensures the card is above the background image */
+
+   
+}
+
+.cta-section h2 {
+    font-family: 'Playfair Display'v;
+    font-size: 2.5rem; /* Slightly smaller for the card */
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    color: #222; /* Ensure dark color */
+}
+
+.cta-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; /* Slightly smaller for the card */
+    line-height: 1.6;
+    margin-bottom: 30px; /* Space before button */
+    color: #444; /* Ensure dark color */
+}
+.cta-section .button-container-center {
+    margin-top: 0; /* Handled by p's margin-bottom */
+    text-align: left; /* Align button to the left within the card */
+}
+
+/* Responsive adjustments for CTA Section */
+@media (max-width: 992px) {
+    .cta-section h2 {
+        font-size: 2.2rem;
+    }
+    .cta-section p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .cta-section {
+        padding: 60px 0;
+    }
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+    .cta-section p {
+        font-size: 1rem;
+    }
+}
