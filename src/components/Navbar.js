@@ -6,7 +6,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-logo">
         {/* Replace with your logo file path and alt text */}
-        <img src="/logo.png" alt=" Company Logo" height="40" />
+        <img src="" alt=" Company Logo" height="40" />
       </div>
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>

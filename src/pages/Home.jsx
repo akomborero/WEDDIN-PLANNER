@@ -20,7 +20,7 @@ function Home() {
     
     centerMode: true, 
     centerPadding: '1px', // As per your preference, very minimal space around the center image
-                            
+                                
     responsive: [
       {
         breakpoint: 992, // Settings for screens smaller than 992px (tablets)
@@ -46,11 +46,11 @@ function Home() {
   };
 
   // Array of image URLs for your carousel
-  const carouselImages = [
+                     const carouselImages = [
     'https://i.pinimg.com/736x/85/31/77/85317732e7d0f6f88b705396be5e0da1.jpg',
     'https://i.pinimg.com/736x/0a/55/99/0a5599c5bedffef217ae15c5b0a4da7e.jpg',
     'https://i.pinimg.com/736x/e0/6d/e9/e06de99e77877aa76466745643e38528.jpg',
-    'https://i.com/73x/8d/99/93/8d9993d9cab4ea470c6febf49badbed6.jpg',
+    'https://i.pinimg.com/736x/1f/e3/9d/1fe39d0dfda5f3bc84026700fef1149d.jpg',
   ];
 
   return (
@@ -90,6 +90,7 @@ function Home() {
                   <img 
                       src="https://i.pinimg.com/736x/25/f6/a6/25f6a6421d955c53950c8b82c04a536b.jpg" 
                       alt="" 
+
                   />
               </div>
 
@@ -114,8 +115,8 @@ function Home() {
 
               <div className="image-content-right">
                   <img 
-                      src="https://i.pinimg.com/736x/42/cf/f9/42cff9280cff541c4a6e06f1d9dbe6ef.jpg" 
-                      alt="" 
+                       src="https://i.pinimg.com/736x/42/cf/f9/42cff9280cff541c4a6e06f1d9dbe6ef.jpg" 
+                      alt=" " 
                   />
               </div>
           </div>
@@ -129,14 +130,74 @@ function Home() {
             <p>
                 Imagine your wedding day, flawlessly designed and perfectly tailored to you, without the stress. We'll guide you from your very first idea to a breathtaking execution, handling every intricate detail so you can simply savor every magical moment.
             </p>
-            <Link to="/Event Packages" className="btn primary-btn">
+            <Link to="/event-packages" className="btn primary-btn">
               Plan your Wedding
             </Link>
           </div>
         </div>
       </section>
-   </> 
-  ); /* This is the one and only closing parenthesis for the return statement */
-} /* This is the one and only closing brace for the Home function */
+
+      {/* START OF NEW SECTION: Footer */}
+      <footer className="footer-section">
+          <div className="content-wrapper footer-grid"> {/* Apply footer-grid for layout */}
+              {/* Column 1: Brand Info */}
+              <div className="footer-col brand-info">
+                  <Link to="/" className="footer-logo">
+                      <img src="https://i.pinimg.com/736x/1f/e3/9d/1fe39d0dfda5f3bc84026700fef1149d.jpg" alt="Jesah Events Logo" />
+                  </Link>
+                  <p className="brand-slogan">Crafting unforgettable moments, from vision to breathtaking reality.</p>
+                  <p className="copyright">&copy; {new Date().getFullYear()} Jesah Events. All rights reserved.</p>
+              </div>
+
+              {/* Column 2: Quick Links */}
+              <div className="footer-col quick-links">
+                  <h3>Quick Links</h3>
+                  <ul>
+                      <li><Link to="/">Home</Link></li>
+                      <li><Link to="/our-story">Our Story</Link></li>
+                      <li><Link to="/event-packages">Event Packages</Link></li>
+                      <li><Link to="/our-testimonials">Testimonials</Link></li>
+                      <li><Link to="/contact">Contact</Link></li>
+                  </ul>
+              </div>
+
+              {/* Column 3: Explore Services */}
+              <div className="footer-col explore-services">
+                  <h3>Explore Services</h3>
+                  <ul>
+                      <li><Link to="/services/wedding-planning">Wedding Planning</Link></li>
+                      <li><Link to="/services/corporate-events">Corporate Events</Link></li>
+                      <li><Link to="/services/parties">Birthday & Parties</Link></li>
+                      <li><Link to="/services/photography">Photography & Videography</Link></li>
+                      <li><Link to="/services/decor">Decor & Styling</Link></li>
+                  </ul>
+              </div>
+
+              {/* Column 4: Connect & Contact */}
+              <div className="footer-col connect-us">
+                  <h3>Connect With Us</h3>
+                  <p>Email: <a href="makomborerichidzviva@gmail.com">makomborerichidzviva@gmail.com</a></p>
+                  <p>Phone: <a href="tel:+263718305005">+263 71 830 5005</a></p>
+                  <p>Harare, Zimbabwe</p>
+                  <div className="social-links">
+                      <a href="https://facebook.com/jesahevents" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+                      <a href="https://instagram.com/jesahevents" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+                      <a href="https://pinterest.com/jesahevents" target="_blank" rel="noopener noreferrer"><i className="fab fa-pinterest"></i></a>
+                      {/* Add more social links as needed */}
+                  </div>
+              </div>
+          </div>
+      </footer>
+      {/* END OF NEW SECTION: Footer */}
+    </> 
+  );
+} 
 
 export default Home;
+
+
+
+ 
+
+
+   
