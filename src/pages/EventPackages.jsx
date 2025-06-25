@@ -8,7 +8,7 @@ function EventPackages() {
       id: 1,
       name: 'Basic Planner',
       category: 'Free Tier',
-      image: 'https://i.pinimg.com/564x/a4/09/b8/a409b85c1860d5b4d7f7634f19b05777.jpg', // Placeholder image
+      image: 'https://images.pexels.com/photos/10755717/pexels-photo-10755717.jpeg', // Placeholder image
       description: 'Start your wedding planning journey from "zero to hero" with our essential, easy-to-use tools. Perfectly designed to give you a strong foundation.',
       features: [
         'Personalized Planning Checklist.',
@@ -37,9 +37,7 @@ function EventPackages() {
             Jesah Events offers seamless, end-to-end planning solutions, bringing your perfect day to life 
             whether you're celebrating in the heart of Zimbabwe or anywhere across the globe.
           </p>
-          <Link to="/contact" className="btn primary-btn packages-hero-btn">
-            Choose Your Plan Today
-          </Link>
+         
         </div>
       </section>
 
@@ -62,12 +60,14 @@ function EventPackages() {
                       <li key={index}><i className="fas fa-check-circle"></i> {feature}</li>
                     ))}
                   </ul>
-                  <div className="package-footer">
-                      <span className="package-price">{pkg.price}</span>
-                      <Link to="/contact" className="btn secondary-btn">
-                          Get Started
-                      </Link>
-                  </div>
+                
+<div className="package-footer">
+    <span className="package-price">{pkg.price}</span>
+    <Link to="/dashboard" className="btn secondary-btn"> {/* <-- CHANGE THIS LINE */}
+        Get Started
+    </Link>
+</div>
+
                 </div>
               </div>
             ))}

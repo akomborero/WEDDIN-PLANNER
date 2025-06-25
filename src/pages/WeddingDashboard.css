@@ -1,0 +1,366 @@
+/* src/pages/WeddingDashboard.css */
+
+.wedding-dashboard-page {
+    background-color: #f9f7f5;
+    min-height: 100vh;
+    padding-bottom: 80px;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    background-color: #7F4446; /* A deep, rich red/maroon for elegance */
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    margin-bottom: 50px;
+}
+
+.dashboard-header h1 {
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-size: 3.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 0.05em;
+}
+
+.dashboard-header p {
+    font-family: 'Cormorant Garamond', serif; /* Complementary readable serif */
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Main Content Area */
+.dashboard-main-content {
+    padding: 0 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+/* General Dashboard Section Styling (used for user-inputs-summary and planning-checklist-section) */
+.dashboard-section {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
+    padding: 35px;
+}
+
+.dashboard-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.dashboard-section h2 i {
+    margin-right: 15px;
+    color: #7F4446; /* Matching header color */
+    font-size: 1.1em;
+}
+
+/* --- User Inputs & Summary Section --- */
+.user-inputs-summary {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-inputs-summary h2 {
+    font-size: 2rem;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.input-group input[type="date"],
+.input-group input[type="number"] {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    width: 80%; /* Adjust width as needed */
+    max-width: 300px;
+    box-sizing: border-box;
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s ease;
+}
+
+.input-group input[type="date"]:focus,
+.input-group input[type="number"]:focus {
+    border-color: #7F4446; /* Highlight on focus */
+}
+
+
+.days-countdown {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #7F4446;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.days-countdown.past-date {
+    color: #d9534f; /* A red color for past date */
+}
+
+.budget-comparison {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed #eee;
+}
+
+.budget-comparison p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.budget-comparison p strong {
+    color: #7F4446;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.budget-comparison .note {
+    font-size: 0.95rem;
+    color: #777;
+    margin-top: 20px;
+    line-height: 1.4;
+    font-style: italic;
+}
+
+.budget-over {
+    color: #d9534f !important; /* Red for over budget */
+}
+
+.budget-under {
+    color: #5cb85c !important; /* Green for under budget */
+}
+
+.budget-alert {
+    color: #d9534f;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+/* --- Wedding Checklist Specific Styling --- */
+.planning-checklist-section {
+    /* Uses .dashboard-section styles */
+}
+
+/* NEW STYLES FOR CHECKLIST GROUPING */
+.checklist-group {
+    margin-bottom: 40px; /* Space between groups */
+    border: 1px solid #f0f0f0; /* Subtle border for group separation */
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fcfcfc; /* Slightly different background for groups */
+}
+
+.checklist-group:last-child {
+    margin-bottom: 0; /* No margin after the last group */
+}
+
+.checklist-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #4A4A4A; /* A slightly darker grey than main content text */
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #e0e0e0; /* Dashed separator for group heading */
+    text-align: left; /* Align group titles to the left */
+}
+
+
+.wedding-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.wedding-checklist li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.wedding-checklist li:last-child {
+    border-bottom: none;
+}
+
+.wedding-checklist li:hover {
+    background-color: #fcfafa;
+}
+
+.wedding-checklist li label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.wedding-checklist li input[type="checkbox"] {
+    margin-right: 15px;
+    transform: scale(1.3);
+    accent-color: #7F4446;
+    cursor: pointer;
+}
+
+.wedding-checklist li .task-text {
+    flex-grow: 1;
+}
+
+.wedding-checklist li .price-input-wrapper {
+    display: flex;
+    align-items: center;
+    min-width: 120px; /* Give enough space for input */
+    justify-content: flex-end; /* Align to the right */
+}
+
+.wedding-checklist li .currency-symbol {
+    font-weight: bold;
+    color: #7F4446;
+    margin-right: 5px;
+}
+
+.wedding-checklist li .estimated-price-input {
+    width: 80px; /* Compact width for price input */
+    padding: 8px 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    text-align: right;
+    color: #7F4446;
+    -moz-appearance: textfield; /* Hide number input arrows for Firefox */
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s ease;
+}
+
+.wedding-checklist li .estimated-price-input:focus {
+    border-color: #7F4446; /* Highlight on focus */
+}
+
+/* Hide number input arrows for Chrome, Safari, Edge */
+.wedding-checklist li .estimated-price-input::-webkit-outer-spin-button,
+.wedding-checklist li .estimated-price-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* Styles for completed items */
+.wedding-checklist li.completed .task-text {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.wedding-checklist li.completed .estimated-price-input {
+    color: #a0a0a0;
+    text-decoration: line-through; /* Strikethrough the price too */
+}
+.wedding-checklist li.completed .currency-symbol {
+    color: #a0a0a0;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .dashboard-section {
+        padding: 30px;
+    }
+    .dashboard-section h2 {
+        font-size: 1.8rem;
+    }
+    .user-inputs-summary h2 {
+        font-size: 1.8rem;
+    }
+    .checklist-group h3 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-main-content {
+        padding: 30px 15px;
+        gap: 30px;
+    }
+    .dashboard-section {
+        padding: 25px 15px;
+    }
+    .dashboard-section h2 {
+        font-size: 1.6rem;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .dashboard-section h2 i {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .input-group input[type="date"],
+    .input-group input[type="number"] {
+        width: 100%;
+    }
+    .budget-comparison p {
+        font-size: 1.1rem;
+    }
+    .checklist-group {
+        padding: 15px;
+        margin-bottom: 30px;
+    }
+    .checklist-group h3 {
+        font-size: 1.4rem;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .wedding-checklist li {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 0;
+    }
+    .wedding-checklist li label {
+        margin-bottom: 8px;
+    }
+    .wedding-checklist li input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    .wedding-checklist li .price-input-wrapper {
+        width: 100%;
+        justify-content: flex-start; /* Align price to left on small screens */
+        padding-left: 30px; /* Indent price to align with checkbox */
+    }
+    .wedding-checklist li .estimated-price-input {
+        width: 60px; /* Smaller input for price on mobile */
+    }
+}
