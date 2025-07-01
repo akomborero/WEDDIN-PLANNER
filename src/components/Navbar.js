@@ -16,7 +16,7 @@ function Navbar() {
         <li><Link to="/services">Services</Link></li>
       </ul>
       <div className="navbar-book">
-        <Link to="/book-now" className="book-now-btn">Book Now</Link>
+        <Link to="/event-packages" className="book-now-btn">Book Now</Link>
       </div>
     </nav>
   );

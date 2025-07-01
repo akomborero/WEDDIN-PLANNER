@@ -1,366 +1,904 @@
-/* src/pages/WeddingDashboard.css */
-
-.wedding-dashboard-page {
-    background-color: #f9f7f5;
-    min-height: 100vh;
-    padding-bottom: 80px;
+/* --- Base Styles & Variables --- */
+:root {
+    --primary-color: #e67e88; /* Soft Rose */
+    --secondary-color: #ffe3ee; /* Lighter Pink */
+    --accent-color: #c95d6a; /* Deeper Rose */
+    --text-color: #333;
+    --light-text-color: #555;
+    --background-light: #fefafb; /* Very light pink background */
+    --background-medium: #fff6fa; /* Slightly darker for sections */
+    --border-color: #f0f0f0;
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --spacing-unit: 1em;
+    --transition-speed: 0.3s ease; /* For smooth transitions */
 }
 
-/* Dashboard Header */
-.dashboard-header {
-    background-color: #7F4446; /* A deep, rich red/maroon for elegance */
-    color: #fff;
-    text-align: center;
-    padding: 80px 20px;
-    margin-bottom: 50px;
-}
-
-.dashboard-header h1 {
-    font-family: 'Playfair Display', serif; /* Elegant serif font */
-    font-size: 3.2rem;
-    margin-bottom: 15px;
-    letter-spacing: 0.05em;
-}
-
-.dashboard-header p {
-    font-family: 'Cormorant Garamond', serif; /* Complementary readable serif */
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto;
+/* Ensure HTML and Body cover the full viewport */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh; /* Ensure it covers full height */
+    box-sizing: border-box; /* Include padding/border in element's total width and height */
+    font-family: 'Poppins', sans-serif; /* A modern, readable font */
+    background-color: var(--background-light); /* Explicitly applied to the whole page */
+    color: var(--text-color);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll on very small margins */
 }
 
-/* Main Content Area */
-.dashboard-main-content {
-    padding: 0 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif; /* An elegant display font for headings */
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit);
 }
 
-/* General Dashboard Section Styling (used for user-inputs-summary and planning-checklist-section) */
-.dashboard-section {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Soft shadow for depth */
-    padding: 35px;
+p {
+    color: var(--light-text-color);
 }
 
-.dashboard-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: #333;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 15px;
-}
-
-.dashboard-section h2 i {
-    margin-right: 15px;
-    color: #7F4446; /* Matching header color */
-    font-size: 1.1em;
-}
-
-/* --- User Inputs & Summary Section --- */
-.user-inputs-summary {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.user-inputs-summary h2 {
-    font-size: 2rem;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 25px;
-}
-
-.input-group {
-    margin-bottom: 20px;
+/* --- Root Container - Now ensures full width --- */
+.wedding-dashboard-root {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
     align-items: center;
-}
-
-.input-group label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.input-group input[type="date"],
-.input-group input[type="number"] {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    width: 80%; /* Adjust width as needed */
-    max-width: 300px;
-    box-sizing: border-box;
-    outline: none; /* Remove default outline */
-    transition: border-color 0.3s ease;
-}
-
-.input-group input[type="date"]:focus,
-.input-group input[type="number"]:focus {
-    border-color: #7F4446; /* Highlight on focus */
-}
-
-
-.days-countdown {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #7F4446;
-    margin-top: 15px;
-    font-weight: bold;
-}
-
-.days-countdown.past-date {
-    color: #d9534f; /* A red color for past date */
-}
-
-.budget-comparison {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px dashed #eee;
-}
-
-.budget-comparison p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.budget-comparison p strong {
-    color: #7F4446;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-.budget-comparison .note {
-    font-size: 0.95rem;
-    color: #777;
-    margin-top: 20px;
-    line-height: 1.4;
-    font-style: italic;
-}
-
-.budget-over {
-    color: #d9534f !important; /* Red for over budget */
-}
-
-.budget-under {
-    color: #5cb85c !important; /* Green for under budget */
-}
-
-.budget-alert {
-    color: #d9534f;
-    font-weight: bold;
-    margin-top: 15px;
-    font-size: 1.1rem;
-}
-
-/* --- Wedding Checklist Specific Styling --- */
-.planning-checklist-section {
-    /* Uses .dashboard-section styles */
-}
-
-/* NEW STYLES FOR CHECKLIST GROUPING */
-.checklist-group {
-    margin-bottom: 40px; /* Space between groups */
-    border: 1px solid #f0f0f0; /* Subtle border for group separation */
-    border-radius: 8px;
     padding: 20px;
-    background-color: #fcfcfc; /* Slightly different background for groups */
+    width: 100%; /* Ensures the root container takes full width */
+    box-sizing: border-box;
+    background-color:#7F4446; /* Apply again for consistency */
 }
 
-.checklist-group:last-child {
-    margin-bottom: 0; /* No margin after the last group */
+/* --- Header --- */
+.wedding-dashboard-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: white;
+    padding: 30px 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.checklist-group h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #4A4A4A; /* A slightly darker grey than main content text */
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed #e0e0e0; /* Dashed separator for group heading */
-    text-align: left; /* Align group titles to the left */
+.wedding-dashboard-header svg {
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.wedding-dashboard-header h1 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 0.2em;
+}
+
+.wedding-dashboard-header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1em;
+    line-height: 1.4;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- Main Content Area - Now centers content within full width --- */
+main {
+    width: 100%; /* Ensure main takes full width */
+    max-width: 87%; /* Keep content readable */
+    padding: 0 20px; /* Add padding on sides */
+    box-sizing: border-box;
+}
+
+/* --- Onboarding Form --- */
+.onboarding-form {
+    background-color: rgb(240, 219, 219);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.onboarding-section {
+    margin-bottom: 2.5em;
+    padding-bottom: 1.5em;
+}
+
+.onboarding-section h2 {
+    font-size: 1.8em;
+    color: var(--primary-color);
+    margin-bottom: 1em;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5em;
+}
+
+.category-description {
+    font-style: italic;
+    color: var(--light-text-color);
+    margin-bottom: 1.5em;
+    font-size: 0.95em;
+}
+
+.onboarding-grid {
+    display: column;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.onboarding-q {
+    display: flex;
+    flex-direction: column;
+}
+
+.onboarding-q label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-size: 0.95em;
+}
+
+/* --- Form Input Styling --- */
+.onboarding-q input[type="text"],
+.onboarding-q input[type="number"],
+.onboarding-q input[type="date"],
+.onboarding-q textarea,
+.onboarding-q select { /* Added select */
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: white;
+    background-color:#521e20;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    width: 45%; /* Ensure inputs take full width of their container */
+    box-sizing: border-box; /* Include padding/border in width */
+}
+
+.onboarding-q input:focus,
+.onboarding-q textarea:focus,
+.onboarding-q select:focus { /* Added select focus */
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(230, 126, 136, 0.2);
+    outline: none;
+}
+
+.onboarding-q textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.onboarding-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.onboarding-radio-group label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+/* --- Radio Button Styling (Enhanced) --- */
+.onboarding-radio-group input[type="radio"] {
+    appearance: none; /* Hide default radio button */
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0; /* Prevent shrinking on small screens */
+}
+
+.onboarding-radio-group input[type="radio"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.onboarding-radio-group input[type="radio"]:checked::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white; /* Inner dot */
+    display: block;
+}
+
+.onboarding-radio-group input[type="radio"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(230, 126, 136, 0.4);
 }
 
 
-.wedding-checklist {
-    list-style: none;
+.category-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--secondary-color), rgba(0, 0, 0, 0));
+    margin: 3em 0;
+}
+
+.onboarding-submit {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto 0;
+    padding: 15px 25px;
+    background-color: #110308;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform 0.2s ease, box-shadow var(--transition-speed);
+    box-shadow: var(--shadow-light);
+}
+
+.onboarding-submit:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.onboarding-submit:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.required-star {
+    color: red;
+    margin-left: 4px;
+}
+
+/* --- Progress Bar for Onboarding Form --- */
+.onboarding-progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: white;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.onboarding-progress-bar {
+    height: 100%;
+    background-color: white;
+    border-radius: 4px;
+    transition: width var(--transition-speed);
+}
+
+/* --- Checklist Display Area --- */
+.checklist-display-area {
+    text-align: left;
+    margin: 2em auto;
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow-medium);
+    box-sizing: border-box;
+}
+
+.progress-indicator {
+    margin: 2em 0;
+    text-align: center;
+    background-color: var(--background-medium);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--secondary-color);
+}
+
+.progress-indicator h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.8em;
+    font-size: 1.5em;
+}
+
+.progress-bar-container {
+    width: 80%;
+    max-width: 600px;
+    background-color: var(--border-color);
+    border-radius: 10px;
+    height: 15px;
+    overflow: hidden;
+    margin: 0 auto 10px auto;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    transition: width var(--transition-speed);
+}
+
+/* --- AI Suggestions Section --- */
+.ai-suggestions-section {
+    background-color: #fdf6f7;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin: 2.5em 0;
+    box-shadow: var(--shadow-light);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.ai-suggestions-section h2 {
+    color: var(--accent-color);
+    font-size: 1.6em;
+    margin-top: 0;
+    margin-bottom: 1em;
+    text-align: center;
+    position: relative;
+}
+.ai-suggestions-section h2::after {
+    content: "✨"; /* Little sparkle icon */
+    position: absolute;
+    right: 0;
+    font-size: 0.8em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.ai-suggestions-section ul {
+    list-style: none; /* Remove default bullets */
     padding: 0;
     margin: 0;
 }
+.ai-suggestions-section li {
+    margin-bottom: 0.8em;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-color);
+}
+.ai-suggestions-section li::before {
+    content: "💡"; /* Lightbulb icon */
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-size: 1.2em;
+    line-height: 1;
+}
 
-.wedding-checklist li {
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.checklist-category {
+    margin-top: 3em;
+    margin-bottom: 2.5em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.checklist-category h2 {
+    color: var(--primary-color);
+    font-size: 2em;
+    margin-bottom: 1em;
+    border-left: 6px solid var(--primary-color);
+    padding-left: 15px;
+    line-height: 1.2;
+}
+
+.checklist-task {
+    background: var(--background-medium);
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    position: relative; /* For remove button positioning */
+    cursor: pointer; /* Indicates clickability for expansion */
+    transition: background-color var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.checklist-task.expanded {
+    background-color: white; /* Lighter background when expanded */
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.task-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: #333;
-    transition: background-color 0.2s ease;
+    margin-bottom: 0.5em;
+    position: relative; /* To contain remove button */
 }
 
-.wedding-checklist li:last-child {
-    border-bottom: none;
-}
-
-.wedding-checklist li:hover {
-    background-color: #fcfafa;
-}
-
-.wedding-checklist li label {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.task-header h3 {
+    margin: 0; /* Reset margin */
     flex-grow: 1;
-}
-
-.wedding-checklist li input[type="checkbox"] {
-    margin-right: 15px;
-    transform: scale(1.3);
-    accent-color: #7F4446;
+    color: var(--accent-color);
+    font-size: 1.4em;
     cursor: pointer;
+    padding-right: 60px; /* Make space for buttons */
 }
 
-.wedding-checklist li .task-text {
-    flex-grow: 1;
-}
-
-.wedding-checklist li .price-input-wrapper {
-    display: flex;
-    align-items: center;
-    min-width: 120px; /* Give enough space for input */
-    justify-content: flex-end; /* Align to the right */
-}
-
-.wedding-checklist li .currency-symbol {
+.remove-task-btn {
+    background-color: #f44336; /* Red color for removal */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    min-width: 28px; /* Ensure fixed size */
+    min-height: 28px; /* Ensure fixed size */
+    font-size: 0.9em;
     font-weight: bold;
-    color: #7F4446;
-    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    margin-left: 10px; /* Space from title */
+    flex-shrink: 0; /* Prevent shrinking */
+    position: absolute; /* Position relative to task-header */
+    right: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2; /* Ensure it's clickable over text */
 }
 
-.wedding-checklist li .estimated-price-input {
-    width: 80px; /* Compact width for price input */
-    padding: 8px 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    text-align: right;
-    color: #7F4446;
-    -moz-appearance: textfield; /* Hide number input arrows for Firefox */
-    outline: none; /* Remove default outline */
-    transition: border-color 0.3s ease;
+.remove-task-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-50%) scale(1.1);
 }
 
-.wedding-checklist li .estimated-price-input:focus {
-    border-color: #7F4446; /* Highlight on focus */
+.expand-icon {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin-left: 15px;
+    transition: transform var(--transition-speed);
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
 }
 
-/* Hide number input arrows for Chrome, Safari, Edge */
-.wedding-checklist li .estimated-price-input::-webkit-outer-spin-button,
-.wedding-checklist li .estimated-price-input::-webkit-inner-spin-button {
+.checklist-task.expanded .expand-icon {
+    transform: translateY(-50%) rotate(90deg); /* Rotate icon when expanded */
+}
+
+
+.task-goal {
+    font-style: italic;
+    color: var(--light-text-color);
+    margin-bottom: 1em;
+    font-size: 0.95em;
+}
+
+.subtask-list {
+    list-style: none;
+    padding: 0;
+    margin: 1em 0;
+}
+
+.subtask-list li {
+    margin-bottom: 0.8em;
+}
+
+.subtask-list label {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 1em;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+/* --- Custom Checkbox Styling (Enhanced) --- */
+.subtask-list input[type="checkbox"] {
+    appearance: none; /* Hide default checkbox */
     -webkit-appearance: none;
-    margin: 0;
+    width: 22px; /* Slightly larger */
+    height: 22px; /* Slightly larger */
+    border: 2px solid var(--primary-color); /* Primary color border */
+    border-radius: 6px; /* Slightly rounded corners */
+    margin-right: 12px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    cursor: pointer;
 }
 
+.subtask-list input[type="checkbox"]:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
 
-/* Styles for completed items */
-.wedding-checklist li.completed .task-text {
+.subtask-list input[type="checkbox"]:checked::after {
+    content: '✓'; /* Checkmark symbol */
+    color: white;
+    font-size: 1.2em; /* Adjust size of checkmark */
+    font-weight: bold;
+    line-height: 1; /* Align vertically */
+}
+
+.subtask-list input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(230, 126, 136, 0.4);
+}
+
+.subtask-list input[type="checkbox"]:checked + span {
     text-decoration: line-through;
-    color: #888;
+    color: var(--light-text-color);
 }
 
-.wedding-checklist li.completed .estimated-price-input {
-    color: #a0a0a0;
-    text-decoration: line-through; /* Strikethrough the price too */
+.task-tips, .task-dependencies {
+    margin-top: 1.8em;
+    padding: 1.2em;
+    background: #fdf6f7;
+    border-left: 5px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: var(--light-text-color);
 }
-.wedding-checklist li.completed .currency-symbol {
-    color: #a0a0a0;
+
+.task-tips h4, .task-dependencies h4 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 0.6em;
+    font-size: 1.1em;
+}
+
+.task-tips ul, .task-dependencies ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    padding: 0;
+}
+
+.task-estimated-cost {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 1em;
+    padding-top: 0.8em;
+    border-top: 1px dashed var(--secondary-color);
+}
+
+.add-task-btn {
+    background-color: #66bb6a; /* Green for add */
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5em;
+    width: auto;
+    transition: background-color var(--transition-speed), transform 0.2s ease;
+    display: block; /* Make it a block button */
+    margin-left: auto; /* Center or align right */
+    margin-right: auto;
+}
+
+.add-task-btn:hover {
+    background-color: #4CAF50;
+    transform: translateY(-1px);
+}
+
+/* --- Budget Tracker Section --- */
+.budget-tracker-section {
+    margin-top: 3em;
+    padding-top: 2em;
+    border-top: 1px solid var(--border-color);
+    text-align: left;
+    background-color: var(--background-light);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.budget-tracker-section h2 {
+    color: var(--primary-color);
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+.budget-summary {
+    background-color: var(--background-medium);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 2em;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.budget-summary p {
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    color: var(--text-color);
+}
+
+.budget-summary p:first-of-type {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.budget-progress-bar-container {
+    width: 90%;
+    max-width: 500px;
+    background-color: var(--border-color);
+    border-radius: 8px;
+    height: 12px;
+    overflow: hidden;
+    margin: 15px auto 0;
+}
+
+.budget-progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    transition: width var(--transition-speed);
+}
+
+.add-expense-form {
+    background-color: #fdf6f7;
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 2em;
+}
+
+.add-expense-form h3 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: var(--accent-color);
+}
+
+.add-expense-form form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-expense-form input,
+.add-expense-form select,
+.add-expense-form button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1em;
+    color: var(--text-color);
+}
+
+.add-expense-form input[type="number"] {
+    width: 100px;
+}
+
+.add-expense-form button {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.add-expense-form button:hover {
+    background-color: var(--accent-color);
+}
+
+.budget-categories-detail {
+    margin-top: 2em;
+}
+
+.budget-categories-detail h3 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    color: var(--primary-color);
+}
+
+.budget-category-item {
+    background-color: var(--background-medium);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 1.5em;
+    margin-bottom: 1.2em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+}
+
+.budget-category-item h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.8em;
+    font-size: 1.2em;
+}
+
+.expense-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1em;
+    border-top: 1px dashed var(--secondary-color);
+    padding-top: 1em;
+}
+
+.expense-list li {
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    margin-bottom: 0.5em;
+}
+
+/* --- Modal Styles (for Add Task) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-medium);
+    width: 90%;
+    max-width: 500px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.modal-content h3 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5em;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-content label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.modal-content input,
+.modal-content textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    color: var(--text-color);
+    background-color: #fff;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.add-task-modal-btn, .cancel-task-modal-btn {
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.add-task-modal-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.add-task-modal-btn:hover {
+    background-color: var(--accent-color);
+}
+
+.cancel-task-modal-btn {
+    background-color: #ccc;
+    color: var(--text-color);
+    border: 1px solid #bbb;
+}
+
+.cancel-task-modal-btn:hover {
+    background-color: #bbb;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 
 /* --- Responsive Adjustments --- */
-@media (max-width: 992px) {
-    .dashboard-section {
-        padding: 30px;
+@media (max-width: 768px) {
+    .wedding-dashboard-header {
+        padding: 20px 15px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
-    .dashboard-section h2 {
-        font-size: 1.8rem;
-    }
-    .user-inputs-summary h2 {
-        font-size: 1.8rem;
-    }
-    .checklist-group h3 {
-        font-size: 1.6rem;
-    }
-}
 
-@media (max-width: 576px) {
-    .dashboard-main-content {
-        padding: 30px 15px;
-        gap: 30px;
+    .wedding-dashboard-header h1 {
+        font-size: 2em;
     }
-    .dashboard-section {
-        padding: 25px 15px;
+
+    .wedding-dashboard-header p {
+        font-size: 1em;
     }
-    .dashboard-section h2 {
-        font-size: 1.6rem;
+
+    .onboarding-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .onboarding-form,
+    .checklist-display-area,
+    .budget-tracker-section,
+    .modal-content {
+        padding: 20px;
+        margin: 1em auto;
+    }
+
+    .onboarding-section h2,
+    .checklist-category h2,
+    .budget-tracker-section h2,
+    .ai-suggestions-section h2 {
+        font-size: 1.6em;
+        border-left: 4px solid var(--primary-color);
+        padding-left: 10px;
+    }
+
+    .checklist-task h3 {
+        font-size: 1.2em;
+    }
+
+    .subtask-list input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+    }
+
+    .progress-bar-container, .budget-progress-bar-container {
+        width: 95%;
+    }
+
+    .add-expense-form form {
         flex-direction: column;
-        text-align: center;
-        margin-bottom: 15px;
     }
-    .dashboard-section h2 i {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-    .input-group input[type="date"],
-    .input-group input[type="number"] {
+
+    .add-expense-form input,
+    .add-expense-form select,
+    .add-expense-form button {
         width: 100%;
-    }
-    .budget-comparison p {
-        font-size: 1.1rem;
-    }
-    .checklist-group {
-        padding: 15px;
-        margin-bottom: 30px;
-    }
-    .checklist-group h3 {
-        font-size: 1.4rem;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .wedding-checklist li {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 12px 0;
-    }
-    .wedding-checklist li label {
-        margin-bottom: 8px;
-    }
-    .wedding-checklist li input[type="checkbox"] {
-        margin-right: 10px;
-    }
-    .wedding-checklist li .price-input-wrapper {
-        width: 100%;
-        justify-content: flex-start; /* Align price to left on small screens */
-        padding-left: 30px; /* Indent price to align with checkbox */
-    }
-    .wedding-checklist li .estimated-price-input {
-        width: 60px; /* Smaller input for price on mobile */
+        box-sizing: border-box;
     }
 }
