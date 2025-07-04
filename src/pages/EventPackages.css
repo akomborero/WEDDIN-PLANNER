@@ -1,22 +1,47 @@
+/* GLOBAL RESETS (Important for 100vh to work correctly) */
+html, body {
+    height: 100%; /* Ensure html and body take full height */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Include padding in height calculation for all elements */
+    scroll-behavior: smooth; /* Smooth scrolling for better UX between sections */
+}
+
+*, *::before, *::after {
+    box-sizing: inherit; /* Inherit box-sizing for all elements */
+}
+
+/* --- Base Variables & Mixins (Optional, for more complex setups) --- */
+:root {
+    --primary-accent: #7F4446; /* Deep Rose/Wine */
+    --secondary-accent: #b36b6d; /* Lighter, Muted Rose */
+    --budget-accent: #5a8d7a; /* Soft Teal/Green */
+    --luxury-accent: #e0b06b; /* Golden/Bronze */
+    --dark-neutral: #2c3e50; /* Charcoal Blue */
+    --light-neutral: #f9f7f5; /* Off-white/Cream */
+    --white: #ffffff;
+    --black: #000000;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Cormorant Garamond', serif;
+}
+
 /* --- EventPackages Page Styling --- */
 
 /* Hero Section */
 .packages-hero-section {
-    background-image: url('https://i.pinimg.com/73x/80/c8/15/80c815ec582f3c7847936a282b0e668a.jpg'); /* Example background image */
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    text-align: center;
-    padding: 100px 0;
-    min-height: 400px; /* Ensure sufficient height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: relative; /* For overlay */
-    z-index: 1; /* Ensure text is above overlay */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+              url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format') center/cover;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
 }
 
+/* Remove all text styles */
 .packages-hero-section::before {
     content: '';
     position: absolute;
@@ -25,63 +50,253 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
-    z-index: -1; /* Place behind content */
+    z-index: -1;
 }
 
 .packages-hero-section h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 3.5rem;
     margin-bottom: 20px;
     line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Subtle text shadow for pop */
 }
 
 .packages-hero-section p {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
     font-size: 1.3rem;
     max-width: 800px;
     margin: 0 auto 30px auto;
     line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* Subtle text shadow */
 }
 
-.packages-hero-btn {
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    font-weight: bold;
+/* --- Individual Package Sections (Basic Planner, Budget, Luxury) --- */
+.single-package-section {
+    min-height: 100vh; /* Make it fill the screen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center content (title + card layout) */
+    align-items: center; /* Horizontally center content */
+    padding: 80px 20px; /* Consistent padding */
+    background-color: var(--white); /* Default background */
 }
 
-/* Packages Grid Section */
-.packages-grid-section {
-    padding: 80px 0;
-    background-color: #f9f7f5; /* Light background for contrast */
+/* Alternate background for visual distinction between sections */
+.single-package-section.alternate-background {
+    background-color: var(--light-neutral); /* Light background for alternating sections */
 }
 
-.packages-grid-section h2 {
-    font-family: 'Playfair Display', serif;
+.single-package-section .section-title {
+    font-family: var(--font-heading);
     font-size: 2.8rem;
     text-align: center;
-    color: #333;
-    margin-bottom: 60px;
+    color: var(--dark-neutral); /* Dark neutral for general titles */
+    margin-bottom: 40px; /* Adjusted spacing between title and card */
+    max-width: 800px; /* Prevent title from being too wide */
 }
 
-.packages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Flexible columns */
-    gap: 40px; /* Space between cards */
+/* --- STYLING FOR THE FIRST SECTION (BASIC PLANNER - Card 1) --- */
+/* ===== BASIC PLANNER SECTION - NO SCROLL & COMPACT CARD ===== */
+.basic-planner-section {
+  background: linear-gradient(135deg, #FBF8F3 0%, #F0E6E6 100%);
+  padding: 20px; /* Reduced overall padding for the section itself */
+  height: 100vh; /* Remains full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers content */
+  align-items: left; /* Horizontally centers content */
+  box-sizing: border-box;
+  overflow: hidden; /* Ensures no scroll */
+}
+
+/* Compact Title for this section */
+.basic-planner-section .section-title {
+  font-size: 3rem; /* Slightly smaller title */
+  margin-bottom: 15px; /* Reduced space below title */
+  text-align: center; /* Ensure title is centered */
+  max-width: 90%; /* Prevent title from being too wide on small screens */
+}
+
+/* Scaled-down Card for Basic Planner */
+.basic-planner-section .package-card {
+  max-width: 466px; /* **Crucial:** Significantly narrower card width */
+  width: 92%; /* Ensures it's responsive on smaller screens, never exceeding parent */
+  min-height: 500px; /* Reduced minimum height */
+  margin: 0 auto; /* Keeps the card centered */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07); /* Slightly softer shadow */
+}
+
+/* Compact Image Container */
+.basic-planner-section .package-image-container {
+  height: 140px; /* Reduced image height to save vertical space */
+}
+
+/* Streamlined Content Padding */
+.basic-planner-section .package-details {
+  padding: 15px; /* Tighter internal padding for details */
+}
+
+/* More Compact Features List */
+.basic-planner-section .package-features {
+  margin-bottom: 12px; /* Less space below features list */
+}
+
+.basic-planner-section .package-features li {
+  font-size: 0.89rem; /* **Further reduced feature text size** */
+  padding-left: 10px; /* Slightly less indentation for list items */
+  margin-bottom: 5px; /* Reduced vertical spacing between features */
+  line-height: 1.3; /* Tighter line height for features */
+}
+
+.basic-planner-section .package-features li i {
+  font-size: 0.9rem; /* Smaller checkmark icon */
+  margin-right: 8px; /* Less space between icon and text */
+}
+
+/* Compact Footer */
+.basic-planner-section .package-footer {
+  padding-top: 12px; /* Less padding above the footer */
+}
+
+.basic-planner-section .package-price {
+  font-size: 1.4rem; /* Smaller price text */
+}
+
+.basic-planner-section .btn {
+  padding: 6px 14px; /* Smaller button padding */
+  font-size: 0.85rem; /* Smaller button text */
+}
+
+/* Ensure description fits */
+.basic-planner-section .package-description {
+  font-size: 0.9rem; /* Smaller description text */
+  margin-bottom: 15px; /* Adjusted margin */
+}
+@media (max-height: 700px) {
+  .basic-planner-section {
+    padding-top: 20px;
+  }
+  .basic-planner-section .package-card {
+    min-height: 450px;
+  }
+  .basic-planner-section .package-image-container {
+    height: 150px;
+  }
+}
+/* --- END FIRST SECTION STYLING --- */
+
+/* --- STYLING FOR THE SECOND SECTION (BUDGET WEDDING PACKAGE - Card 2) --- */
+.single-package-section.budget-package-section {
+    background-color: var(--light-neutral); /* Uses alternate background, fine for budget tier */
+}
+
+.single-package-section.budget-package-section .section-title {
+    color: var(--dark-neutral);
+}
+
+.single-package-section.budget-package-section .package-category {
+    background-color: var(--budget-accent); /* Soft teal/green for "Budget" */
+}
+
+.single-package-section.budget-package-section .btn.secondary-btn {
+    border-color: var(--budget-accent);
+    color: var(--budget-accent);
+}
+.single-package-section.budget-package-section .btn.secondary-btn:hover {
+    background-color: var(--budget-accent);
+    color: var(--white);
+}
+
+.single-package-section.budget-package-section .package-price {
+    color: var(--budget-accent); /* Match price color to accent */
+}
+
+.single-package-section.budget-package-section .package-features li i {
+    color: var(--budget-accent); /* Match checkmarks to budget accent */
+}
+/* --- END SECOND SECTION STYLING --- */
+
+/* --- STYLING FOR THE THIRD SECTION (LUXURY DREAM WEDDING - Card 3) --- */
+.single-package-section.luxury-package-section {
+    background-color:white; /* Deep, luxurious dark blue/grey background */
+    color: var(--white); /* Light text for overall section contrast */
+}
+
+.single-package-section.luxury-package-section .section-title,
+.single-package-section.luxury-package-section .package-details h3 {
+    color: var(--luxury-accent); /* Golden/bronze accent for titles */
+}
+
+.single-package-section.luxury-package-section .package-category {
+    background-color: var(--luxury-accent); /* Golden/bronze for category tag */
+    color: var(--dark-neutral); /* Dark text on gold for contrast */
+}
+
+.single-package-section.luxury-package-section .package-price {
+    color: var(--luxury-accent); /* Golden/bronze for price */
+}
+
+.single-package-section.luxury-package-section .package-features li {
+    color: #ccc; /* Slightly lighter text for features for readability on dark */
+}
+
+.single-package-section.luxury-package-section .package-features li i {
+    color: var(--luxury-accent); /* Golden/bronze for checkmarks */
+}
+
+/* Make the card itself stand out more on the dark background */
+.single-package-section.luxury-package-section .package-card {
+    background-color: #3d5066; /* Slightly lighter dark for the card background */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* More pronounced shadow for luxury feel */
+}
+
+.single-package-section.luxury-package-section .btn.secondary-btn {
+    background-color: var(--luxury-accent); /* Gold button background */
+    color: var(--dark-neutral); /* Dark text on gold */
+    border: 1px solid var(--luxury-accent);
+}
+
+.single-package-section.luxury-package-section .btn.secondary-btn:hover {
+    background-color: #c79f58; /* Darker gold on hover */
+    color: var(--dark-neutral);
+    transform: translateY(-2px);
+}
+
+.single-package-section.luxury-package-section .package-description {
+    color: #d0d0d0; /* Lighter description text for readability */
+}
+/* --- END THIRD SECTION STYLING --- */
+
+
+/* --- GENERAL PACKAGE CARD STYLING (Applies to all cards unless overridden by specific section styles) --- */
+.package-display-layout {
+    display: flex;
+    flex-direction: column; /* Stack elements by default on smaller screens */
+    align-items: center; /* Center the card horizontally within its layout */
+}
+
+.package-card-container {
+    display: flex;
+    justify-content: center; /* Center the package card within its container */
+    width: 100%;
 }
 
 .package-card {
-    background-color: #fff;
+    background-color: var(--white); /* Default card background */
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 650px; /* Ensure consistent height for all cards. Adjust if content varies wildly. */
+    max-width: 450px; /* Limit the max width of the card for readability */
+    width: 100%;
 }
 
 .package-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
 }
 
 .package-image-container {
@@ -94,20 +309,20 @@
 .package-image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cover the container without distortion */
+    object-fit: cover;
     transition: transform 0.5s ease;
 }
 
 .package-card:hover .package-image-container img {
-    transform: scale(1.05); /* Slight zoom on hover */
+    transform: scale(1.05); /* Subtle zoom on image hover */
 }
 
 .package-category {
     position: absolute;
     top: 20px;
     left: 20px;
-    background-color: #7F4446; /* Accent color */
-    color: #fff;
+    background-color: var(--primary-accent); /* Default Accent color */
+    color: var(--white);
     padding: 8px 15px;
     border-radius: 5px;
     font-size: 0.9rem;
@@ -118,63 +333,111 @@
 
 .package-details {
     padding: 30px;
-    flex-grow: 1; /* Allow details section to grow */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
 .package-details h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.8rem;
-    color: #333;
+    color: #333; /* Dark text for card titles */
     margin-bottom: 15px;
-    min-height: 60px; /* Ensure consistent height for titles */
+    min-height: 60px; /* Ensures consistent title height */
 }
 
 .package-description {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
     font-size: 1.1rem;
-    color: #555;
+    color: #555; /* Medium grey for body text */
     line-height: 1.6;
     margin-bottom: 20px;
-    flex-grow: 1; /* Allow description to grow */
+    flex-grow: 1; /* Allows description to take available space */
 }
 
 .package-features {
     list-style: none;
     padding: 0;
     margin-bottom: 25px;
+    min-height: 160px; /* Ensure consistent height for features across cards. Adjust as needed. */
 }
 
 .package-features li {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
     font-size: 1rem;
-    color: #444;
+    color: #444; /* Dark grey for feature text */
     margin-bottom: 10px;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Aligns icon and text nicely */
 }
 
 .package-features li i {
-    color: #7F4446; /* Checkmark icon color */
+    color: var(--primary-accent); /* Default Checkmark icon color */
     margin-right: 10px;
     font-size: 1.1rem;
+    flex-shrink: 0; /* Prevents icon from shrinking */
+    padding-top: 2px; /* Small adjustment for icon alignment */
 }
 
 .package-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: auto; /* Push to the bottom of the card */
+    margin-top: auto; /* Pushes footer to the bottom */
     padding-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #eee; /* Subtle separator */
 }
 
 .package-price {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: bold;
-    color: #7F4446; /* Price color */
+    color: var(--primary-accent); /* Default Price color */
+}
+
+/* Global Content Wrapper */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* General Button Styles */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Added box-shadow to transition */
+    font-weight: bold;
+}
+
+.btn.primary-btn {
+    background-color: var(--primary-accent); /* Your main accent color */
+    color: var(--white);
+}
+
+.btn.primary-btn:hover {
+    background-color: #6a3a3d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow on hover */
+}
+
+.btn.secondary-btn {
+    background-color: #f0f0f0; /* Light background for secondary buttons */
+    color: var(--primary-accent); /* Accent color text */
+    border: 1px solid var(--primary-accent);
+}
+
+.btn.secondary-btn:hover {
+    background-color: var(--primary-accent);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow on hover */
 }
 
 /* --- Responsive Adjustments --- */
@@ -185,12 +448,11 @@
     .packages-hero-section p {
         font-size: 1.1rem;
     }
-    .packages-grid-section h2 {
+    .single-package-section .section-title {
         font-size: 2.2rem;
     }
-    .packages-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
+    .package-card {
+        min-height: 580px; /* Adjust for smaller screens */
     }
     .package-details h3 {
         font-size: 1.6rem;
@@ -202,7 +464,7 @@
 
 @media (max-width: 576px) {
     .packages-hero-section {
-        padding: 80px 20px;
+        padding: 60px 20px;
     }
     .packages-hero-section h1 {
         font-size: 2.2rem;
@@ -210,16 +472,16 @@
     .packages-hero-section p {
         font-size: 1rem;
     }
-    .packages-grid-section {
-        padding: 60px 0;
+    .single-package-section {
+        padding: 60px 20px;
     }
-    .packages-grid-section h2 {
+    .single-package-section .section-title {
         font-size: 1.8rem;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
-    .packages-grid {
-        grid-template-columns: 1fr; /* Stack cards on mobile */
-        gap: 25px;
+    .package-card {
+        min-height: 520px; /* Further adjust for mobile */
+        max-width: 90%; /* Allow cards to take more width on small screens */
     }
     .package-details {
         padding: 20px;

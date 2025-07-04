@@ -1,0 +1,84 @@
+/* Import Allura font from Google Fonts (add this to the top of your CSS file) */
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap'); /* Adding other common fonts for consistency */
+
+/* --- General Page Styling --- */
+.our-story-passion-origin {
+    padding: 60px 20px;
+    background-color: #fcf8f7; /* Soft, warm background */
+    font-family: 'Open Sans', sans-serif; /* Readable default font */
+    color: #333;
+    text-align: center; /* Center align for the intro section */
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px; /* Add some horizontal padding for smaller screens */
+}
+
+/* --- Section Heading --- */
+.our-story-passion-origin h2 {
+    font-family: 'Playfair Display', serif; /* Elegant serif font for main headings */
+    color: #8c5a6d; /* A rich, elegant color */
+    margin-bottom: 40px;
+    font-size: 2.8em; /* Large, prominent heading */
+    line-height: 1.2;
+}
+
+/* --- Specific Allura Font Styling for "Passion" --- */
+.allura-font {
+    font-family: 'Allura', cursive;
+    font-weight: normal; /* Allura often looks best at normal weight */
+    font-size: 1.1em; /* Make it slightly larger than surrounding text for emphasis */
+    color: #a34a66; /* A slightly darker or contrasting shade for emphasis */
+}
+
+/* --- Origin Content Layout --- */
+.origin-content {
+    display: flex;
+    flex-direction: column; /* Stacks image and text on small screens */
+    align-items: center; /* Centers items when stacked */
+    gap: 30px; /* Space between image and text */
+}
+
+.origin-img {
+    width: 180px; /* Generous size for a welcoming headshot */
+    height: 180px;
+    border-radius: 50%; /* Makes it a circle */
+    object-fit: cover; /* Ensures image covers the circle without distortion */
+    border: 5px solid #e0c2cb; /* Soft, complementary border */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.origin-content p {
+    font-size: 1.1em;
+    line-height: 1.8; /* Good line height for readability */
+    max-width: 700px; /* Prevents lines from being too long on wide screens */
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* --- Responsive Adjustments --- */
+@media (min-width: 768px) {
+    .origin-content {
+        flex-direction: row; /* Arranges image and text side-by-side on larger screens */
+        text-align: left; /* Aligns text to the left for better readability in a row layout */
+    }
+    .origin-img {
+        margin-right: 30px; /* Space to the right of the image when in a row */
+        flex-shrink: 0; /* Prevents the image from shrinking */
+    }
+    .our-story-passion-origin h2 {
+        font-size: 3.2em; /* Slightly larger heading on desktops */
+    }
+}
+
+@media (max-width: 767px) {
+    .our-story-passion-origin h2 {
+        font-size: 2.2em; /* Smaller heading on mobile for better fit */
+    }
+    .origin-img {
+        width: 150px; /* Slightly smaller image on mobile */
+        height: 150px;
+    }
+}
