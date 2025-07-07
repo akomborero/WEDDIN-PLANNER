@@ -1,0 +1,95 @@
+/* src/components/ImageCarousel.css */
+
+/* --- Essential for Scrollability & Swipe Behavior --- */
+.image-carousel-container {
+  position: absolute; /* Or relative, depending on parent. Important: needs defined height/width */
+  top: 0;
+  left: 0;
+  width: 100%; /* Must have a defined width */
+  height: 100%; /* Must have a defined height for its children to fill */
+
+  /* KEY FOR SCROLLING */
+  overflow-x: scroll; /* Makes content inside scroll horizontally if it overflows */
+  overflow-y: hidden; /* Prevents vertical scrolling */
+
+  /* KEY FOR SWIPE EFFECT (SNAP) */
+  scroll-snap-type: x mandatory; /* Enables horizontal snapping */
+
+  cursor: grab; /* Visual cue that it's draggable */
+  z-index: 1; /* Ensure it's layered correctly */
+
+  /* Hide scrollbar for a cleaner look (optional, but common for carousels) */
+  -ms-overflow-style: none; /* For Internet Explorer/Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+.image-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Essential for Side-by-Side Layout --- */
+.carousel-images-wrapper {
+  /* KEY FOR SIDE-BY-SIDE LAYOUT */
+  display: flex; /* Arranges all .carousel-image-slide elements in a row */
+
+  height: 100%; /* Ensures the wrapper takes full height of the container */
+
+  /* Spacing and padding for better visual appeal */
+  gap: 20px; /* Space between each image slide */
+  padding: 0 20px; /* Padding on the left and right ends of the scrollable area */
+  box-sizing: border-box; /* Ensures padding is included in the element's total width */
+}
+
+/* --- Essential for Individual Image Sizing & Snap --- */
+.carousel-image-slide {
+  /* KEY: PREVENTS IMAGES FROM SHRINKING */
+  flex-shrink: 0; /* Important! Ensures images maintain their width and don't shrink */
+
+  height: 100%; /* Makes each slide fill the height of its wrapper */
+
+  background-size: cover; /* Ensures image covers the slide area without distortion */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents image from repeating */
+  border-radius: 8px; /* Optional: adds nice rounded corners */
+
+  /* KEY: DETERMINES HOW MANY IMAGES ARE VISIBLE */
+  /* This value determines how much of each image is visible before scrolling.
+     Adjust '33.33%' and '13.33px' based on your desired number of visible images
+     and the 'gap' value.
+     (100% / number of desired visible items) - (gap / (number of visible items - 1 + padding_factor))
+  */
+  width: calc(33.33% - 13.33px); /* Example: For 3 images visible with a 20px gap */
+
+  /* KEY FOR SWIPE EFFECT (SNAP) */
+  scroll-snap-align: start; /* Each image snaps to the beginning of the scroll container */
+}
+
+/* --- Responsive Adjustments (Highly Recommended) --- */
+/* These media queries ensure your carousel looks great on all screen sizes */
+
+@media (max-width: 992px) {
+  .carousel-image-slide {
+    width: calc(50% - 10px); /* On tablets, show two images */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-images-wrapper {
+    gap: 15px;
+    padding: 0 15px;
+  }
+  .carousel-image-slide {
+    width: calc(100% - 15px); /* On smaller tablets/large phones, show one image */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-images-wrapper {
+    gap: 10px;
+    padding: 0 10px;
+  }
+  .carousel-image-slide {
+    width: calc(100% - 10px); /* On mobile, ensure only one image is prominently displayed */
+  }
+}

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './EventPackages.css';
+import ImageCarousel from '../components/ImageCarousel'; // Corrected import path
 
 function EventPackages() {
   const packages = [
+    // ... (Your existing package data remains the same)
     {
       id: 1,
       name: 'Basic Planner',
@@ -54,6 +56,24 @@ function EventPackages() {
     }
   ];
 
+  // --- NEW AND EXPANDED CAROUSEL IMAGES ---
+  const carouselImages = [
+    // Weddings
+    'https://images.pexels.com/photos/9721886/pexels-photo-9721886.jpeg', // Wedding couple
+    'https://i.pinimg.com/736x/a8/c9/2b/a8c92b383488b8744286860b79ea6540.jpg', // Wedding aisle decor
+'https://i.pinimg.com/736x/1f/e4/ae/1fe4aee121a3092e2fb45cff592aa1fb.jpg', // Sunset wedding ceremony
+
+    // Birthdays / Parties
+    'https://i.pinimg.com/736x/9f/73/6f/9f736fa79e1990b2e8909bd2abedb0c0.jpg', // Vibrant birthday party setup
+
+    'https://i.pinimg.com/736x/2a/b3/7a/2ab37aa63666fcdd817050fbb7087369.jpg', // Elegant adult birthday party
+ 'https://images.pexels.com/photos/9721886/pexels-photo-9721886.jpeg', // Wedding couple
+    'https://i.pinimg.com/736x/a8/c9/2b/a8c92b383488b8744286860b79ea6540.jpg', // Wedding aisle decor
+'https://i.pinimg.com/736x/1f/e4/ae/1fe4aee121a3092e2fb45cff592aa1fb.jpg', // Sunset wedding ceremony
+
+
+  ];
+
   const renderPackageSection = (pkg, index, isAlternate = false) => (
     <section
       key={pkg.id}
@@ -63,13 +83,13 @@ function EventPackages() {
                   ${index === 1 ? 'budget-package-section' : ''}
                   ${index === 2 ? 'luxury-package-section' : ''}`}
       style={{
-        backgroundColor: index === 0 ? '#f9f2f5' : 
-                        index === 1 ? '#f5f0f9' : 
-                        '#f0f5f9'
+        backgroundColor: index === 0 ? '#f9f2f5' :
+                         index === 1 ? '#f5f0f9' :
+                         '#f0f5f9'
       }}
     >
       <div className="content-wrapper">
-        <h2 
+        <h2
           className="section-title"
           style={{
             fontFamily: '"Playfair Display", serif',
@@ -84,20 +104,20 @@ function EventPackages() {
             <div className="package-card">
               <div className="package-image-container">
                 <img src={pkg.image} alt={pkg.name} />
-                <span 
+                <span
                   className="package-category"
                   style={{
                     fontFamily: '"Montserrat", sans-serif',
                     backgroundColor: index === 0 ? '#d4af37' :
-                                      index === 1 ? '#a2836e' :
-                                      '#8b5a2b',
+                                     index === 1 ? '#a2836e' :
+                                     '#8b5a2b',
                     color: 'white'
                   }}
                 >
                   {pkg.category}
                 </span>
               </div>
-              <div 
+              <div
                 className="package-details"
                 style={{
                   fontFamily: '"Raleway", sans-serif'
@@ -106,27 +126,27 @@ function EventPackages() {
                 <h3 style={{ fontFamily: '"Playfair Display", serif', color: '#5d3a1a' }}>
                   {pkg.name}
                 </h3>
-                <p 
+                <p
                   className="package-description"
                   style={{ color: '#666', lineHeight: '1.6' }}
                 >
                   {pkg.description}
                 </p>
-                <ul 
+                <ul
                   className="package-features"
                   style={{ color: '#5d3a1a' }}
                 >
                   {pkg.features.map((feature, idx) => (
                     <li key={idx} style={{ marginBottom: '8px' }}>
-                      <i 
-                        className="fas fa-check-circle" 
+                      <i
+                        className="fas fa-check-circle"
                         style={{ color: '#d4af37' }}
                       ></i> {feature}
                     </li>
                   ))}
                 </ul>
                 <div className="package-footer">
-                  <span 
+                  <span
                     className="package-price"
                     style={{
                       fontFamily: '"Playfair Display", serif',
@@ -136,8 +156,8 @@ function EventPackages() {
                   >
                     {pkg.price}
                   </span>
-                  <Link 
-                    to={pkg.link} 
+                  <Link
+                    to={pkg.link}
                     className="btn secondary-btn"
                     style={{
                       backgroundColor: '#d4af37',
@@ -155,23 +175,17 @@ function EventPackages() {
       </div>
     </section>
   );
+
   return (
     <div className="event-packages-page">
       {/* --- DASHBOARD HERO SECTION --- */}
       <section className="dashboard-hero-section new-hero-wedding">
-        {/* The video element positioned behind everything else */}
         <video className="hero-video-background" autoPlay loop muted playsInline>
-  <source src="https://videos.pexels.com/video-files/27979649/12279936_1920_1080_25fps.mp4" type="video/mp4" />
-  {/* It's highly recommended to use a *different* video file for the .webm source if possible.
-      Not all browsers that support MP4 also support MP4 when served as WebM.
-      If you can't get a .webm version, you might stick to just the MP4 for now,
-      but understand some browsers might not play it. */}
-  <source src="https://videos.pexels.com/video-files/3122106/3122106-hd_1920_1080_25fps.webm" type="video/webm" /> 
-  {/* If Pexels doesn't provide a .webm, remove this second source tag. 
-      You can also add a poster image for a better fallback: */}
-  <img src="https://images.pexels.com/photos/3122106/pexels-photo-3122106.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Wedding couple" />
-  Your browser does not support the video tag.
-</video>
+          <source src="https://videos.pexels.com/video-files/27979649/12279936_1920_1080_25fps.mp4" type="video/mp4" />
+          <source src="https://videos.pexels.com/video-files/3122106/3122106-hd_1920_1080_25fps.webm" type="video/webm" />
+          <img src="https://images.pexels.com/photos/3122106/pexels-photo-3122106.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200" alt="Wedding couple" />
+          Your browser does not support the video tag.
+        </video>
 
         <div className="hero-bg-overlay"></div>
         <div className="hero-content-wrapper">
@@ -197,6 +211,25 @@ function EventPackages() {
       {packages.map((pkg, index) => (
         renderPackageSection(pkg, index, index % 2 !== 0)
       ))}
+
+      {/* Spacing between sections */}
+      <br />
+      <br />
+
+      {/* --- THOUGHTFULLY CURATED SECTION --- */}
+      <section className="thoughtfully-curated-section">
+        <ImageCarousel images={carouselImages} /> {/* Now using the expanded array */}
+        <div className="thoughtfully-curated-overlay"></div>
+        <div className="thoughtfully-curated-content">
+          <h1>Thoughtfully Curated for Every Celebration</h1>
+          <p>
+            At Jesah Events, we understand that no two celebrations are the same. Whether you’re planning a romantic wedding,
+            a lavish birthday, a baby shower, or a sophisticated corporate gathering, we offer flexible packages designed
+            to suit your vision, needs, and budget.
+          </p>
+        </div>
+      </section>
+
     </div>
   );
 }
