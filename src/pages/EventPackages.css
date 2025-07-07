@@ -526,94 +526,92 @@ html, body {
 }
 
 
-
-/* ... (Your existing CSS styles) ... */
-
-/* --- THOUGHTFULLY CURATED SECTION --- */
-/* --- THOUGHTFULLY CURATED SECTION --- */
-/* This is the container for the ImageCarousel and the content */
-.thoughtfully-curated-section {
-  position: relative; /* <-- ESSENTIAL for absolute children like ImageCarousel */
-  min-height: 500px; /* <-- Ensures the section has a visible height */
-  overflow: hidden; /* Keeps content (like images) contained */
-  display: flex; /* Used to center the content div */
-  align-items: center;
-  justify-content: center;
-  color: white; /* Default text color for direct children */
-  text-align: center;
-  padding: 50px 20px; /* Padding around the content */
+/* Carousel Background Section Styles */
+.carousel-background-section {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 600px;
+  overflow: hidden;
+  margin: 2rem 0;
 }
 
-/* --- OVERLAY for the Thoughtfully Curated Section --- */
-/* This sits on top of the ImageCarousel but beneath the text content */
-.thoughtfully-curated-overlay {
-  position: absolute; /* <-- Absolute positioning relative to .thoughtfully-curated-section */
+.carousel-background-container {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* <-- Semi-transparent black. Alpha (0.4) is key! */
-  z-index: 2; /* <-- Placed above ImageCarousel (z-index: 1) but below content (z-index: 3) */
 }
 
-/* --- CONTENT within the Thoughtfully Curated Section --- */
-.thoughtfully-curated-content {
-  position: relative; /* Ensures it sits above the overlay */
-  z-index: 3; /* HIGHEST z-index, ensuring text is always visible */
-  color: white;
+.carousel-content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.centered-content-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 3rem;
+  border-radius: 12px;
+  max-width: 600px;
   text-align: center;
-  max-width: 800px;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6); /* Slightly darker background for the text card */
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.thoughtfully-curated-content h1 {
+.centered-content-card h2 {
+  color: #7F4446;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
   font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  color: #d4af37; /* Gold color for heading */
-  margin-bottom: 20px;
-  line-height: 1.2;
 }
 
-.thoughtfully-curated-content p {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #f0f0f0;
+.centered-content-card p {
+  color: #333;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.centered-content-card .btn {
+  margin-top: 1rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .thoughtfully-curated-section {
-    min-height: 400px; /* Adjusted from fixed height to min-height for responsiveness */
+  .carousel-background-section {
+    height: 60vh;
+    min-height: 400px;
   }
-
-  .thoughtfully-curated-content {
-    max-width: 90%;
-    padding: 15px;
+  
+  .centered-content-card {
+    padding: 2rem;
+    margin: 0 1rem;
   }
-
-  .thoughtfully-curated-content h1 {
+  
+  .centered-content-card h2 {
     font-size: 2rem;
-  }
-
-  .thoughtfully-curated-content p {
-    font-size: 0.95rem;
   }
 }
 
 @media (max-width: 480px) {
-  .thoughtfully-curated-section {
-    min-height: 350px; /* Adjusted from fixed height to min-height for responsiveness */
+  .centered-content-card {
+    padding: 1.5rem;
   }
-
-  .thoughtfully-curated-content h1 {
-    font-size: 1.6rem;
+  
+  .centered-content-card h2 {
+    font-size: 1.8rem;
   }
-
-  .thoughtfully-curated-content p {
-    font-size: 0.85rem;
+  
+  .centered-content-card p {
+    font-size: 1rem;
   }
 }

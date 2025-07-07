@@ -1,60 +1,84 @@
-import React, { useRef } from 'react'; // Only useRef is needed now
+import React, { useState, useEffect, useRef } from 'react';
 import './ImageCarousel.css';
 
-const ImageCarousel = ({ images }) => {
-  const carouselRef = useRef(null); // Still need this to attach to the scroll container
+const ImageCarousel = ({ images, isBackground = false, visibleItems = 3 }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0);
+  const carouselRef = useRef(null);
+  const containerRef = useRef(null);
 
-  // We no longer need:
-  // - useState for currentIndex
-  // - useEffect for auto-sliding
-  // - useEffect for scrolling to currentIndex
-  // - slideIntervalRef
-  // - userInteractedRef
-  // - scrollToSlide useCallback
-  // - handleDotClick
+  // Calculate item width based on container and visible items
+  useEffect(() => {
+    const updateItemWidth = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const calculatedWidth = containerWidth / visibleItems;
+        setItemWidth(calculatedWidth);
+      }
+    };
 
-  // The dots will still show, but won't control scrolling directly from JS.
-  // Their active state will implicitly depend on scroll position (handled by CSS scroll-snap)
-  // For a purely manual scroll with dots, you might consider an Intersection Observer
-  // to detect which slide is visible and update the active dot, but for now,
-  // we'll remove dot logic as auto-scroll is gone.
+    updateItemWidth();
+    window.addEventListener('resize', updateItemWidth);
+    
+    return () => window.removeEventListener('resize', updateItemWidth);
+  }, [visibleItems]);
+
+  const goToNext = () => {
+    setCurrentIndex(prevIndex => 
+      prevIndex >= images.length - visibleItems ? 0 : prevIndex + 1
+    );
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex(prevIndex => 
+      prevIndex <= 0 ? images.length - visibleItems : prevIndex - 1
+    );
+  };
 
   return (
-    <div className="image-carousel-container" ref={carouselRef}>
-      <div className="carousel-images-wrapper">
+    <div 
+      className={`carousel-container ${isBackground ? 'background-carousel' : ''}`}
+      ref={containerRef}
+    >
+      <div 
+        className="carousel-track"
+        ref={carouselRef}
+        style={{ 
+          transform: `translateX(-${currentIndex * itemWidth}px)`,
+          transition: 'transform 0.5s ease-in-out'
+        }}
+      >
         {images.map((image, index) => (
-          <div
-            key={index}
-            className="carousel-image-slide"
-            style={{ backgroundImage: `url(${image})` }}
-            data-slide-index={index} // Keep this, useful for future enhancements
-            tabIndex={0} // Good for accessibility even with manual scroll
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${index + 1} of ${images.length}`}
-          ></div>
+          <div 
+            key={index} 
+            className="carousel-slide"
+            style={{ width: `${itemWidth}px` }}
+          >
+            <img 
+              src={image} 
+              alt={`Slide ${index + 1}`} 
+              loading="lazy"
+              className="carousel-image"
+            />
+          </div>
         ))}
       </div>
-      {/*
-        Removing carousel dots as their JS logic was tied to auto-scroll
-        and managing their active state with purely manual scroll would require
-        additional logic (e.g., Intersection Observer), which is outside the scope
-        of simply enabling swipe. If you still want dots that reflect position,
-        we can add that logic back with an Intersection Observer.
-      */}
-      {/* <div className="carousel-dots">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={`dot ${index === 0 ? 'active' : ''}`} // Placeholder active, will not dynamically update
-            // onClick handler removed
-            aria-label={`Go to slide ${index + 1}`}
-            role="button"
-            tabIndex={0}
-            // onKeyDown handler removed
-          ></span>
-        ))}
-      </div> */}
+
+      {/* Navigation Arrows */}
+      <button 
+        className="carousel-arrow carousel-arrow-left" 
+        onClick={goToPrev}
+        aria-label="Previous slide"
+      >
+        &lt;
+      </button>
+      <button 
+        className="carousel-arrow carousel-arrow-right" 
+        onClick={goToNext}
+        aria-label="Next slide"
+      >
+        &gt;
+      </button>
     </div>
   );
 };

@@ -1,0 +1,33 @@
+/* --- Base HTML, Body, and #root Styles --- */
+/* These are critical to ensure the entire page area can be managed by flexbox */
+html, body, #root {
+  height: 100%; /* Makes sure they take up the full viewport height */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* A helpful CSS reset for consistent sizing */
+}
+
+/* --- The Main Application Wrapper --- */
+/* This container defines the overall vertical layout of your app */
+.app-wrapper {
+  display: flex; /* Turns on flexbox */
+  flex-direction: column; /* Stacks children (Navbar, Main, Footer) vertically */
+  min-height: 100vh; /* Ensures the wrapper is at least the full viewport height.
+                       If content is longer, it will expand. */
+  /* You can add 'overflow: hidden;' here if you want to prevent
+     any content from spilling outside the wrapper, but usually not needed. */
+}
+
+/* --- The Main Content Area That Holds Your Pages --- */
+/* This is the key element that allows your content to push the footer down */
+.main-content {
+  flex-grow: 1; /* This tells the main content area to take up all available
+                   vertical space, effectively pushing the footer to the bottom. */
+  /* DO NOT put 'max-width' or 'padding' here if you want your *page backgrounds*
+     to stretch full width. Page-specific content constraining should be done
+     within the individual page components using classes like '.content-wrapper'. */
+}
+
+/* Any other global styles (like universal font definitions, button base styles)
+   can go below here, but avoid anything that interferes with the primary
+   flexbox layout above. */
