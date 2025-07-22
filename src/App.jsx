@@ -4,9 +4,9 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import EventPackages from "./pages/EventPackages";
 import WeddingDashboard from "./pages/WeddingDashboard";
-import OurStory from "./pages/OurStory"; // <--- NEW: Import your OurStory component
-// ... (imports)
-import Footer from './components/Footer'; // Don't forget to import it!
+import OurStory from "./pages/OurStory";
+import Testimonials from "./pages/Testimonials"; // <--- NEW: Import your Testimonials component
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -18,8 +18,9 @@ function App() {
         <Route path="/event-packages" element={<EventPackages />} />
         <Route path="/dashboard" element={<WeddingDashboard />} />
         <Route path="/our-story" element={<OurStory />} />
+        <Route path="/testimonials" element={<Testimonials />} /> {/* <--- NEW: Add the route for Testimonials */}
       </Routes>
-      <Footer /> {/* Add the Footer component here */}
+      <Footer />
     </Router>
   );
 }

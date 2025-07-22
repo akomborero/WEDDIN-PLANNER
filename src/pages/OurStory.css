@@ -1,84 +1,735 @@
-/* Import Allura font from Google Fonts (add this to the top of your CSS file) */
+/* src/pages/OurStory.css (Finalized Version) */
+
+/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap'); /* Adding other common fonts for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
 
-/* --- General Page Styling --- */
+/* ======================================= */
+/* --- OUR STORY SECTION STYLES --- */
+/* ======================================= */
 .our-story-passion-origin {
-    padding: 60px 20px;
-    background-color: #fcf8f7; /* Soft, warm background */
-    font-family: 'Open Sans', sans-serif; /* Readable default font */
+    padding: 50px 20px;
+    background-color: #fcf8f7;
+    font-family: 'Open Sans', sans-serif;
     color: #333;
-    text-align: center; /* Center align for the intro section */
 }
 
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 15px; /* Add some horizontal padding for smaller screens */
+.story-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
 }
 
-/* --- Section Heading --- */
-.our-story-passion-origin h2 {
-    font-family: 'Playfair Display', serif; /* Elegant serif font for main headings */
-    color: #8c5a6d; /* A rich, elegant color */
+.story-text-column {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+}
+
+.story-text-column h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #7F4446;
     margin-bottom: 40px;
-    font-size: 2.8em; /* Large, prominent heading */
+    font-size: 2.8em;
     line-height: 1.2;
+    text-align: left;
 }
 
-/* --- Specific Allura Font Styling for "Passion" --- */
 .allura-font {
     font-family: 'Allura', cursive;
-    font-weight: normal; /* Allura often looks best at normal weight */
-    font-size: 1.1em; /* Make it slightly larger than surrounding text for emphasis */
-    color: #a34a66; /* A slightly darker or contrasting shade for emphasis */
+    font-weight: normal;
+    font-size: 1em;
+    color: #a34a66;
 }
 
-/* --- Origin Content Layout --- */
-.origin-content {
+.story-text-column p {
+    font-size: 0,1em; /* UPDATED: Reduced from 1.05em */
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 0;
+}
+
+/* --- View More Button Styles (Global) --- */
+.view-more-btn {
+    width: 250px;
+    height: 60px;
+    background-color: #7F4446;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 30px;
     display: flex;
-    flex-direction: column; /* Stacks image and text on small screens */
-    align-items: center; /* Centers items when stacked */
-    gap: 30px; /* Space between image and text */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.origin-img {
-    width: 180px; /* Generous size for a welcoming headshot */
+.view-more-btn:hover {
+    background-color: #a34a66;
+    transform: translateY(-2px);
+}
+
+/* --- Responsive adjustments for the button --- */
+@media (max-width: 767px) {
+    .view-more-btn {
+        width: 100%;
+        max-width: 200px;
+        height: 50px;
+        font-size: 1em;
+        margin-top: 25px;
+    }
+}
+
+.story-images-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.story-thumbnail {
+    width: 100%;
+    max-width: 280px;
     height: 180px;
-    border-radius: 50%; /* Makes it a circle */
-    object-fit: cover; /* Ensures image covers the circle without distortion */
-    border: 5px solid #e0c2cb; /* Soft, complementary border */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.origin-content p {
-    font-size: 1.1em;
-    line-height: 1.8; /* Good line height for readability */
-    max-width: 700px; /* Prevents lines from being too long on wide screens */
-    margin: 0; /* Remove default paragraph margin */
+.story-thumbnail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* --- Responsive Adjustments --- */
+/* --- Responsive Adjustments for Our Story Section --- */
 @media (min-width: 768px) {
-    .origin-content {
-        flex-direction: row; /* Arranges image and text side-by-side on larger screens */
-        text-align: left; /* Aligns text to the left for better readability in a row layout */
+    .story-content-wrapper {
+        flex-direction: row;
+        align-items: flex-start;
     }
-    .origin-img {
-        margin-right: 30px; /* Space to the right of the image when in a row */
-        flex-shrink: 0; /* Prevents the image from shrinking */
+    .story-text-column {
+        padding-right: 30px;
+        margin-left: 30px;
     }
-    .our-story-passion-origin h2 {
-        font-size: 3.2em; /* Slightly larger heading on desktops */
+    .story-images-column {
+        padding: 0;
+    }
+    .story-text-column h2 {
+        font-size: 3.5em;
+    }
+    .story-thumbnail {
+        height: 230px;
+    }
+    .story-img-1 {
+        transform: translateX(-30px);
+    }
+    .story-img-2 {
+        transform: translateX(30px);
     }
 }
 
 @media (max-width: 767px) {
-    .our-story-passion-origin h2 {
-        font-size: 2.2em; /* Smaller heading on mobile for better fit */
+    .our-story-passion-origin {
+        padding: 30px 15px;
     }
-    .origin-img {
-        width: 150px; /* Slightly smaller image on mobile */
-        height: 150px;
+    .story-text-column h2 {
+        font-size: 2.2em;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    .story-text-column p {
+        font-size: 0.9em; /* UPDATED: Reduced from 0.95em for mobile */
+    }
+    .story-images-column {
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+    .story-thumbnail {
+        max-width: 90%;
+        height: 160px;
+    }
+    .story-img-1 {
+        transform: translateX(-10px);
+    }
+    .story-img-2 {
+        transform: translateX(10px);
+    }
+}
+
+
+
+
+/* ======================================= */
+/* --- OUR MISSION SECTION STYLES --- */
+/* ======================================= */
+/* --- OUR MISSION SECTION STYLES --- */
+/* ======================================= */
+/* --- OUR MISSION SECTION STYLES --- */
+/* ======================================= */
+.our-mission-section {
+    padding: 30px 0;
+    background-color: #D3C1C1;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    position: relative;
+    min-height: 500px; /* This min-height will apply until 1920px breakpoint */
+    overflow: hidden;
+}
+
+/* Style for the main "Our Mission" heading */
+.mission-main-heading {
+    font-family: 'Cormorant Garamond', serif;
+    color: #7F4446;
+    font-size: 3em;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    padding: 0 15px;
+    text-align: left;
+    position: relative;
+    z-index: 2;
+}
+
+/* Container for full-width images - default flex behavior */
+.mission-full-width-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 0 15px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Styles for individual images within the full-width band - default responsive styles */
+.mission-img-full-width {
+    flex: 1;
+    min-width: 280px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: static;
+}
+
+.mission-img-full-width:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* Style for the mission statement text */
+.mission-statement-text {
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #555;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 0 30px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Specific Adjustments for 1920px+ Screens for Our Mission Section --- */
+@media (min-width: 1920px) {
+    .our-mission-section {
+        width: 100vw;
+        height: 600px; /* SIGNIFICANTLY REDUCED: Aiming for single-screen view */
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .our-mission-section .container {
+        max-width: 1850px;
+        margin: 0 auto;
+        padding: 0;
+        position: relative;
+        height: 100%;
+    }
+
+    .mission-main-heading {
+        font-size: 3em; /* REDUCED: Heading font size */
+        margin-bottom: 10px;
+        padding-top: 35px;
+        padding-left: 91px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .mission-statement-text {
+        font-size: 1em; /* REDUCED: Paragraph font size */
+        margin-top: 20px;
+        padding-left: 91px;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 900px;
+        text-align: left;
+    }
+
+    .mission-full-width-images {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        margin: 0;
+        padding: 0;
+        gap: 0;
+    }
+
+    .mission-img-full-width {
+        display: block;
+        position: absolute;
+        width: 250px; /* SIGNIFICANTLY REDUCED width */
+        height: 400px; /* SIGNIFICANTLY REDUCED height */
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 1;
+        pointer-events: auto;
+    }
+
+    /* Specific positions for each image with recalculated 'left' and 'top' */
+    #mission-img-1 {
+        top: 100px; /* Adjusted top for new section/image height */
+        left: 91px;
+    }
+
+    #mission-img-2 {
+        top: 100px; /* Adjusted top */
+        left: 371px; /* Recalculated: 91px (base) + 250px (new width) + 30px (gap) = 371px */
+    }
+
+    #mission-img-3 {
+        top: 100px; /* Adjusted top */
+        left: 651px; /* Recalculated: 371px (prev left) + 250px (new width) + 30px (gap) = 651px */
+    }
+}
+
+/* --- Responsive Adjustments for Our Mission Section (General Desktop/Tablet) --- */
+@media (min-width: 768px) and (max-width: 1919px) {
+    .mission-main-heading {
+        font-size: 3.5em; /* REDUCED: Heading font size for this range */
+        text-align: left;
+        padding-left: 15px;
+    }
+    .mission-statement-text {
+        font-size: 1.3em; /* REDUCED: Paragraph font size for this range */
+        text-align: left;
+        padding: 0 50px;
+        margin-top: 20px;
+    }
+    .mission-full-width-images {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        padding: 0 30px;
+        position: relative;
+        height: auto;
+        width: auto;
+        gap: 15px;
+    }
+    .mission-img-full-width {
+        flex-basis: calc(28% - 20px); /* REDUCED: Slightly narrower percentage */
+        max-width: calc(28% - 20px); /* REDUCED: Max-width percentage */
+        height: 300px; /* REDUCED: Image height for this range */
+        position: static;
+        width: auto;
+    }
+}
+
+/* --- Responsive Adjustments for Our Mission Section (Mobile) --- */
+@media (max-width: 767px) {
+    .our-mission-section {
+        padding: 20px 0;
+    }
+    .mission-main-heading {
+        font-size: 2.5em;
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    .mission-full-width-images {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+        position: static;
+        height: auto;
+        width: auto;
+    }
+    .mission-img-full-width {
+        max-width: 95%;
+        height: auto;
+        position: static;
+    }
+    .mission-statement-text {
+        font-size: 1.1em;
+        padding: 0 15px;
+        text-align: left;
+        margin-top: 15px;
+    }
+}
+
+
+
+
+
+/* ======================================= */
+/* --- WHY WE DO WHAT WE DO SECTION STYLES --- */
+/* ======================================= */
+.why-we-do-section {
+    padding: 30px 20px;
+    background-color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+}
+
+.why-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+padding-left: 50px;
+}
+
+.why-text-column {
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* UPDATED: Centers content vertically within the column */
+    align-items: center;
+    height: auto;
+    min-height: unset;
+}
+
+.why-text-column h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #7F4446;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    line-height: 1.2;
+}
+
+.why-text-column p {
+    font-size: 1em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 0;
+}
+
+/* Images Column */
+.why-images-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    height: auto;
+    min-height: unset;
+    gap: 15px;
+}
+
+.why-img {
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.why-img:hover {
+    transform: translateY(-5px);
+}
+
+/* Specific styles for each image */
+.why-img-1 {
+    z-index: 3;
+    transform: translateX(10%);
+}
+
+.why-img-2 {
+    z-index: 2;
+    margin-top: 15px;
+    transform: translateX(-10%);
+}
+
+.why-img-3 {
+    z-index: 1;
+    margin-top: 15px;
+    transform: translateX(10%);
+}
+
+/* --- Responsive Adjustments for Why We Do Section --- */
+@media (min-width: 768px) {
+    .why-we-do-section {
+        padding: 50px 20px;
+    }
+    .why-content-wrapper {
+        flex-direction: row;
+        align-items: center; /* UPDATED: Center text and image columns vertically */
+        justify-content: center;
+        gap: 50px;
+        min-height: unset;
+    }
+    .why-text-column {
+        padding-right: 40px;
+        justify-content: center; /* UPDATED: Centers content vertically for desktop */
+        align-items: flex-start;
+        text-align: left;
+    }
+    .why-text-column h2 {
+        font-size: 4em;
+        margin-bottom: 25px;
+    }
+    .why-text-column p {
+        font-size: 1.15em;
+    }
+    .why-images-column {
+        padding: 0;
+        gap: 20px;
+    }
+
+    /* Apply specific desktop dimensions */
+    .why-img {
+        width: 350px;
+        height: 175px;
+        max-width: unset;
+    }
+    /* Adjust image staggering for alignment */
+    .why-img-1 {
+        transform: translateX(20px);
+        margin-top: 0;
+    }
+    .why-img-2 {
+        margin-top: 20px;
+        transform: translateX(-20px);
+    }
+    .why-img-3 {
+        margin-top: 20px;
+        transform: translateX(20px);
+    }
+    .view-more-btn {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .why-we-do-section {
+        padding: 25px 15px;
+    }
+    .why-content-wrapper {
+        gap: 20px;
+    }
+    .why-text-column {
+        text-align: center;
+        justify-content: center; /* UPDATED: Centers content vertically for mobile */
+        align-items: center;
+    }
+    .why-text-column h2 {
+        font-size: 2.2em;
+        margin-bottom: 15px;
+    }
+    .why-text-column p {
+        font-size: 0.95em;
+    }
+    .why-images-column {
+        padding-top: 20px;
+        gap: 10px;
+    }
+    /* Responsive dimensions for mobile - height remains auto to preserve aspect ratio */
+    .why-img {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+    /* Staggering for Mobile with adjusted gap */
+    .why-img-1 {
+        transform: translateX(5%);
+    }
+    .why-img-2 {
+        margin-top: 15px;
+        transform: translateX(-5%);
+    }
+    .why-img-3 {
+        margin-top: 15px;
+        transform: translateX(5%);
+    }
+}
+
+
+
+/* ======================================= */
+/* --- OUR PROMISE TO YOU SECTION STYLES --- */
+/* ======================================= */
+.our-promise-section {
+    padding: 60px 20px; /* Default/mobile padding */
+    background-color: #D3C1C1;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    text-align: center;
+}
+
+.promise-content-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile/default */
+    align-items: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.promise-text-column {
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+}
+
+.promise-text-column h2 {
+    font-family: 'Cormorant Garamond', serif;
+    color: #7F4446;
+    font-size: 2.8em;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.promise-text-column p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 0;
+}
+
+.promise-image-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.promise-img {
+    width: 400px;
+    max-width: 450px;
+    height: 300px;
+    border-radius: 10px; /* Default border radius */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
+
+/* --- Responsive Adjustments for Our Promise Section (Tablet/Desktop up to 1919px) --- */
+@media (min-width: 768px) and (max-width: 1919px) {
+    .our-promise-section {
+        padding: 80px 20px;
+    }
+
+    .promise-content-wrapper {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+    }
+
+    .promise-text-column {
+        text-align: left;
+    }
+
+    .promise-text-column h2 {
+        font-size: 3.5em;
+    }
+
+    .promise-text-column p {
+        font-size: 1.2em;
+    }
+
+    .promise-image-column {
+        order: 2;
+    }
+
+    .promise-img {
+        max-width: 500px;
+    }
+}
+
+/* --- Specific Adjustments for 1920px+ Screens for Our Promise Section --- */
+@media (min-width: 1920px) {
+    .our-promise-section {
+        width: 100vw;
+        height: 1080px; /* UPDATED: Section height to fill screen vertically */
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .our-promise-section .container {
+        max-width: 1850px; /* Wider container for full-screen feel */
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        justify-content: center; /* Center the content wrapper horizontally */
+        align-items: center; /* Center the content wrapper vertically */
+    }
+
+    .promise-content-wrapper {
+        position: relative; /* Maintain relative positioning if needed for children */
+        height: auto; /* Allow content to define height within flex alignment */
+        flex-direction: row;
+        justify-content: center; /* Keep columns grouped and centered */
+        align-items: center; /* Vertically center content columns */
+        gap: 100px; /* UPDATED: Increased gap for larger screen distribution */
+        padding: 0; /* Remove padding here, handled by wrapper flex */
+        max-width: 100%; /* Ensure it can expand within the container */
+    }
+
+    .promise-text-column {
+        flex: 1;
+        max-width: 700px; /* UPDATED: Wider max-width for text column */
+        text-align: left;
+    }
+
+    .promise-text-column h2 {
+        font-size: 4em; /* UPDATED: Larger heading for taller section */
+        margin-bottom: 30px;
+    }
+
+    .promise-text-column p {
+        font-size: 1.3em; /* UPDATED: Larger paragraph for taller section */
+    }
+
+    .promise-image-column {
+        flex: none; /* Prevent flex-grow */
+        width: 824px; /* UPDATED: Fixed width as requested */
+        height: 536px; /* UPDATED: Fixed height as requested */
+        display: flex; /* Ensure inner image can fill this */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .promise-img {
+        width: 100%; /* Fill the parent column's width */
+        height: 100%; /* Fill the parent column's height */
+        border-radius: 20px; /* UPDATED: Border radius as requested */
+        max-width: unset; /* Remove max-width constraint */
     }
 }
