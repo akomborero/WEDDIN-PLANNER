@@ -400,16 +400,15 @@
 
 /* --- New Section: Call to Action --- */
 .cta-section {
-   
-    background-image: url('https://images.pexels.com/photos/6490277/pexels-photo-6490277.jpeg'); 
+    background-image: url('https://images.pexels.com/photos/6490277/pexels-photo-6490277.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    min-height: 100vh; /* Now covers the full screen height */
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    min-height: 100vh;
+    display: flex; /* Kept for overall alignment flexibility */
+    align-items: flex-end; /* Card aligns to the bottom */
+    justify-content: flex-start; /* Card aligns to the start of the line */
     padding: 0;
     width: 100%;
     overflow: hidden;
@@ -418,70 +417,151 @@
 
 /* --- CTA Content (Now the Card) --- */
 .cta-section .cta-content {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white card background */
-    padding: 35px; /* Padding inside the card */
-    border-radius: 10px; /* Rounded corners for the card */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); /* Shadow for depth */
-    max-width: 450px; /* Max width for readability of card content */
-    width: 90%; /* Responsive width */
-    text-align: left; /* Text inside the card is left-aligned */
-    color: #222; /* Dark text color for contrast on light card */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    max-width: 450px;
+    width: 90%;
+    text-align: left;
+    color: #222;
 
-    /* Positioning the card to the bottom-left */
-    position: absolute; 
-    bottom: 50px; /* Distance from the bottom edge of the section */
-    right: 100px; /* Distance from the left edge of the section */
-    z-index: 2; /* Ensures the card is above the background image */
-
-   
+    /* Positioning the card - Adjusted for better responsiveness */
+    position: absolute;
+    bottom: 50px;
+    /* Use 'left' for consistency if you want it on the left.
+       If it's meant to be on the right, 'right: 100px;' is fine for desktop.
+       We'll adjust this in media queries. */
+    right: 100px; /* Default for larger screens */
+    z-index: 2;
 }
 
 .cta-section h2 {
-    font-family: 'Playfair Display'v;
-    font-size: 2.5rem; /* Slightly smaller for the card */
+    font-family: 'Playfair Display', serif; /* Corrected typo: removed 'v' */
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 15px;
     line-height: 1.2;
-    color: #222; /* Ensure dark color */
+    color: #222;
 }
 
 .cta-section p {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; /* Slightly smaller for the card */
+    font-size: 1.1rem;
     line-height: 1.6;
-    margin-bottom: 30px; /* Space before button */
-    color: #444; /* Ensure dark color */
+    margin-bottom: 30px;
+    color: #444;
 }
 .cta-section .button-container-center {
-    margin-top: 0; /* Handled by p's margin-bottom */
-    text-align: left; /* Align button to the left within the card */
+    margin-top: 0;
+    text-align: left;
 }
 
-/* Responsive adjustments for CTA Section */
-@media (max-width: 992px) {
+
+/* --- Responsive adjustments for CTA Section (World-Class) --- */
+
+/* Larger Desktops (1200px and up) - Ensure card is not too far in */
+@media (min-width: 1200px) {
+    .cta-section .cta-content {
+        right: 150px; /* Push it slightly more from the edge on very wide screens */
+        bottom: 70px; /* Slightly higher */
+    }
+    .cta-section h2 {
+        font-size: 2.8rem;
+    }
+    .cta-section p {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Tablets & Smaller Desktops (max-width: 991px) */
+@media (max-width: 991px) {
+    .cta-section {
+        min-height: 80vh; /* Adjust min-height for tablets */
+        align-items: center; /* Center content vertically in the section */
+        justify-content: center; /* Center content horizontally */
+    }
+
+    .cta-section .cta-content {
+        position: relative; /* Change from absolute to relative for normal flow */
+        bottom: auto; /* Reset bottom */
+        right: auto; /* Reset right */
+        margin: 0 auto; /* Center the card horizontally */
+        max-width: 600px; /* Allow card to be wider */
+        width: 85%; /* Adjust width */
+        padding: 30px; /* Slightly less padding */
+        text-align: center; /* Center card content */
+    }
+
     .cta-section h2 {
         font-size: 2.2rem;
     }
     .cta-section p {
         font-size: 1.1rem;
     }
+    .cta-section .button-container-center {
+        text-align: center; /* Center button on tablet */
+    }
 }
 
-@media (max-width: 576px) {
+/* Medium Phones & Small Tablets (max-width: 767px) */
+@media (max-width: 767px) {
     .cta-section {
-        padding: 60px 0;
+        min-height: 70vh; /* Further reduce min-height */
+        padding: 40px 0; /* Add some vertical padding as fallback */
+    }
+    .cta-section .cta-content {
+        width: 90%; /* Take more width on smaller screens */
+        padding: 25px;
     }
     .cta-section h2 {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
     }
     .cta-section p {
         font-size: 1rem;
     }
 }
 
+/* Small Phones (max-width: 575px) */
+@media (max-width: 575px) {
+    .cta-section {
+        min-height: 60vh; /* More compact on small phones */
+    }
+    .cta-section .cta-content {
+        width: 95%; /* Almost full width */
+        padding: 20px; /* Less padding */
+        border-radius: 8px; /* Slightly less rounded */
+    }
+    .cta-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+    .cta-section p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    /* Ensure the button scales well - assuming primary-btn is defined globally */
+    .cta-section .primary-btn {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Tiny Phones (max-width: 379px) */
+@media (max-width: 379px) {
+    .cta-section .cta-content {
+        padding: 15px;
+    }
+    .cta-section h2 {
+        font-size: 1.4rem;
+    }
+    .cta-section p {
+        font-size: 0.85rem;
+    }
+}
 
 
-/*footer*/ 
 
 
 /* --- Footer Section Styling --- */
@@ -493,16 +573,26 @@
     width: 100%;
 }
 
+/* Assuming a global .content-wrapper provides max-width and margin: 0 auto;
+   If not, define it here for consistent site-wide centering: */
+.content-wrapper { /* This might be a global class used across your site */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px; /* Default horizontal padding for content */
+}
+
 .footer-section .content-wrapper.footer-grid {
     display: grid; /* Use CSS Grid for robust column layout */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
     gap: 40px; /* Space between columns */
     align-items: flex-start; /* Align columns to the top */
-    padding: 0 30px; /* Reuse content-wrapper padding */
+    /* Padding here will override the global content-wrapper padding if needed,
+       but often the global one is sufficient. */
+    padding: 0 30px;
 }
 
 .footer-col {
-    margin-bottom: 20px; /* Space between columns on smaller screens */
+    margin-bottom: 20px; /* Space between columns on smaller screens (will be reset for stacked) */
 }
 
 .footer-col h3 {
@@ -592,23 +682,75 @@
     color: #7F4446;
 }
 
-/* --- Responsive Adjustments for Footer --- */
-@media (max-width: 992px) {
+/* --- Responsive Adjustments for Footer (World-Class) --- */
+
+/* Large Desktops (min-width: 1200px) */
+@media (min-width: 1200px) {
     .footer-section .content-wrapper.footer-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust columns for tablets */
-        gap: 30px;
+        grid-template-columns: repeat(4, 1fr); /* Ensure 4 columns on large screens */
+        gap: 60px; /* More spacing on large screens */
     }
 }
 
-@media (max-width: 576px) {
+/* Tablets Landscape (max-width: 991px) */
+@media (max-width: 991px) {
+    .footer-section .content-wrapper.footer-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjust min-width for tablets */
+        gap: 30px;
+        padding: 0 40px; /* More padding for tablets */
+    }
+    .footer-col h3 {
+        font-size: 1.5rem;
+    }
+    .footer-col ul li a,
+    .footer-col.connect-us p {
+        font-size: 1rem;
+    }
+    .social-links a {
+        font-size: 1.6rem;
+    }
+}
+
+/* Tablets Portrait & Large Phones (max-width: 767px) */
+@media (max-width: 767px) {
+    .footer-section {
+        padding: 50px 0;
+    }
+    .footer-section .content-wrapper.footer-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns for many phones/small tablets */
+        gap: 30px 20px; /* Vertical and horizontal gap */
+        padding: 0 30px;
+    }
+    .footer-col h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    .footer-col ul li {
+        margin-bottom: 8px;
+    }
+    .footer-col ul li a,
+    .footer-col.connect-us p {
+        font-size: 0.95rem;
+    }
+    .social-links {
+        justify-content: flex-start; /* Keep left aligned if space allows */
+    }
+}
+
+/* Small Phones (max-width: 575px) */
+@media (max-width: 575px) {
+    .footer-section {
+        padding: 40px 0;
+    }
     .footer-section .content-wrapper.footer-grid {
         grid-template-columns: 1fr; /* Stack columns on mobile */
         gap: 25px;
-        text-align: center; /* Center align content for mobile */
+        padding: 0 20px;
+        text-align: center; /* Center align all footer content */
     }
 
     .footer-col {
-        margin-bottom: 0; /* Remove extra margin */
+        margin-bottom: 0;
     }
 
     .footer-col h3 {
@@ -620,8 +762,13 @@
         display: block;
         margin: 0 auto 15px auto; /* Center logo */
     }
-    
+
     .social-links {
         justify-content: center; /* Center social icons */
+        margin-top: 15px;
+    }
+    .footer-col ul { /* Center link lists */
+        width: fit-content;
+        margin: 0 auto;
     }
 }

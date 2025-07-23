@@ -1,19 +1,25 @@
+/* Base Styles (for desktop and general layout) */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 30px;
-  padding-right: 28px;
-  padding-bottom: 30px;
-  padding-left: 28px;
-  
+  padding: 30px 28px;
   background: #fff;
   color: #7F4446;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  position: relative;
+  z-index: 1000;
 }
 
 .navbar-logo img {
   height: 40px;
+}
+
+/* Default state for content wrapper on desktop */
+.navbar-content-wrapper {
+  display: flex; /* Flex on desktop to keep links and button horizontal */
+  align-items: center;
+  gap: 2rem; /* Gap between links and book button */
 }
 
 .navbar-links {
@@ -35,24 +41,135 @@
   color: #7F4446; /* Accent color */
 }
 
+/* Active link styling */
+.navbar-links li a.active {
+  color: #7F4446; /* Your accent color */
+  font-weight: 600; /* Make it slightly bolder */
+  border-bottom: 2px solid #7F4446; /* A subtle underline */
+  padding-bottom: 3px; /* Space between text and underline */
+}
+
+
 .navbar-book .book-now-btn {
- width: 176px;
- height: 69px;
+  width: auto;
+  height: auto;
   background: #7F4446;
   color: #fff;
   border: none;
-  padding-top:20px ;
-  padding-right: 30px;
-  padding-bottom: 20px;
-  gap: 10px;
-  padding-left: 30px;
+  padding: 20px 30px;
   border-radius: 10px;
   text-decoration: none;
- 
+  display: inline-block;
   box-shadow: 0 2px 6px rgba(215,38,61,0.08);
   transition: background 0.2s;
+  white-space: nowrap; /* Prevent text from wrapping on multiple lines */
 }
 
 .navbar-book .book-now-btn:hover {
-  background: #00000040;
+  background: #6a3a3c;
+}
+
+/* Hamburger Icon Styles */
+.hamburger {
+  display: none; /* Hidden on desktop */
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  z-index: 1001; /* Above mobile menu */
+}
+
+.hamburger .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #222;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hamburger animation when 'open' class is applied */
+.hamburger.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 20px 20px;
+  }
+
+  /* Show hamburger icon */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hide content wrapper by default on small screens */
+  .navbar-content-wrapper {
+    display: none; /* Hide by default */
+    flex-direction: column; /* Stack vertically for mobile */
+    background: #fff;
+    position: absolute;
+    top: 80px; /* Position below the main navbar height */
+    left: 0;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    z-index: 999;
+    transform: translateY(-100%); /* Start off-screen above */
+    transition: transform 0.3s ease-out; /* Smooth slide-in */
+  }
+
+  /* When mobile menu is open */
+  .navbar-content-wrapper.open {
+    display: flex; /* Show when open */
+    transform: translateY(0); /* Slide into view */
+  }
+
+  .navbar-links {
+    flex-direction: column; /* Ensure links stack */
+    align-items: center; /* Center links */
+    gap: 1.5rem; /* Smaller gap for mobile */
+    width: 100%; /* Take full width of wrapper */
+    margin-bottom: 20px; /* Space between links and button */
+  }
+
+  .navbar-links li {
+    width: 100%; /* Make list items full width */
+    text-align: center;
+  }
+
+  .navbar-links li a {
+    padding: 10px 0; /* Add padding to clickable area */
+    display: block; /* Make the whole link area clickable */
+    color: #222;
+  }
+
+  /* Ensure active style is still visible on mobile */
+  .navbar-links li a.active {
+    color: #7F4446;
+    border-bottom: 2px solid #7F4446;
+  }
+
+  .navbar-book {
+    width: 100%; /* Take full width for button positioning */
+    display: flex; /* Use flex to center the button */
+    justify-content: center; /* Center the button horizontally */
+  }
+
+  .navbar-book .book-now-btn {
+    width: 80%; /* Make button wider on mobile */
+    text-align: center; /* Center text in button */
+    margin: 0; /* Remove specific margins, rely on flex centering */
+  }
 }

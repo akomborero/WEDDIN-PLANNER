@@ -1,0 +1,161 @@
+/* Import fonts if not already globally imported or needed specifically here */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* --- Our Mission Section Styling --- */
+.our-mission-section {
+    padding: 80px 20px; /* Consistent padding with other sections */
+    background-color: #D3C1C1; /* The specified background color */
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+}
+
+/* Reusing .container from previous sections for consistent width */
+/* .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+} */
+/* If you have a global .container style, you don't need to repeat it here. */
+
+
+/* --- Mission Content Wrapper (Flex Container for columns) --- */
+.mission-content-wrapper {
+    display: flex;
+    flex-direction: column; /* Stacks text and images on small screens by default */
+    gap: 60px; /* Space between columns */
+    align-items: center; /* Centers items when stacked */
+    /* Add a max-width and center for the whole wrapper for consistency */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px; /* Consistent horizontal padding */
+}
+
+/* --- Mission Text Column --- */
+.mission-text-column {
+    flex: 1; /* Allows text column to grow */
+    max-width: 600px; /* Optimal reading width */
+    text-align: left;
+}
+
+.mission-text-column h2 {
+    font-family: 'Playfair Display', serif;
+    color: #7F4446; /* A matching elegant color, or adjust as desired */
+    font-size: 3em;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    text-align: left; /* Ensure heading is left-aligned */
+}
+
+.mission-text-column p {
+    font-size: 1.15em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 0;
+}
+
+/* --- Mission Images Column --- */
+.mission-images-column {
+    flex: 1.5; /* Gives more space to images column */
+    display: flex; /* Use flex for side-by-side images */
+    flex-direction: row; /* Images side-by-side on desktop */
+    gap: 20px; /* Space between images */
+    justify-content: center; /* Center images horizontally in the column */
+    align-items: center; /* Align items vertically (e.g., if images have different heights) */
+    flex-wrap: wrap; /* Allow images to wrap to the next line on smaller screens */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent white background */
+    border-radius: 10px; /* Slightly rounded container for images */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.mission-img {
+    width: 100%; /* Will be overridden by max-width for specified dimensions */
+    max-width: 551px; /* Specified width */
+    height: 712px; /* Specified height */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+    border-radius: 20px; /* Specified border-radius */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Shadow for individual images */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+.mission-img:hover {
+    transform: translateY(-8px); /* Lift effect on hover */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15); /* Enhanced shadow on hover */
+}
+
+/* --- Responsive Adjustments --- */
+
+/* Desktop and Larger Tablets (min-width: 768px) */
+@media (min-width: 768px) {
+    .mission-content-wrapper {
+        flex-direction: row; /* Side-by-side layout on larger screens */
+        align-items: flex-start; /* Align items to the top */
+    }
+    .mission-text-column {
+        padding-right: 40px; /* Space between text and image column */
+    }
+    .mission-text-column h2 {
+        font-size: 3.8em;
+    }
+    .mission-images-column {
+        flex-wrap: nowrap; /* Prevent wrapping on larger screens for consistent side-by-side */
+        justify-content: flex-end; /* Push images to the right end of their column */
+    }
+    .mission-img {
+        /* On larger screens, these values are fixed as per requirement */
+        width: 551px; /* Ensure fixed width on large screens */
+        height: 712px; /* Ensure fixed height on large screens */
+        display: block; /* Ensure all images are displayed */
+    }
+}
+
+/* Mobile Devices (max-width: 767px) */
+@media (max-width: 767px) {
+    .mission-content-wrapper {
+        padding: 0 20px; /* Adjust padding for mobile */
+        gap: 40px; /* Adjust gap for mobile */
+    }
+    .mission-text-column h2 {
+        font-size: 2.5em;
+        text-align: center; /* Center heading on mobile */
+    }
+    .mission-text-column p {
+        text-align: center; /* Center paragraph text on mobile */
+    }
+    .mission-images-column {
+        flex-direction: column; /* Stack images vertically on small screens */
+        gap: 15px; /* Adjust gap for mobile */
+        padding: 15px;
+    }
+    .mission-img {
+        width: 90%; /* Make images responsive for mobile */
+        height: auto; /* Allow height to adjust proportionally */
+        max-width: 300px; /* Cap max width for mobile images */
+        margin: 0 auto; /* Center the single image */
+    }
+
+    /* --- NEW: Hide all but the first image on mobile --- */
+    .mission-images-column .mission-img:not(:first-child) {
+        display: none; /* Hide all images except the first one */
+    }
+}
+
+/* Smallest Phones (max-width: 480px) */
+@media (max-width: 480px) {
+    .our-mission-section {
+        padding: 60px 15px;
+    }
+    .mission-text-column h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+    .mission-text-column p {
+        font-size: 1em;
+    }
+    .mission-images-column {
+        padding: 10px;
+    }
+    .mission-img {
+        max-width: 250px; /* Further cap max width for very small screens */
+    }
+}
