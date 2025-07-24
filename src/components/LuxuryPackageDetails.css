@@ -1,0 +1,523 @@
+/* src/components/LuxuryPackageDetails.css */
+
+/* Define custom properties (CSS variables) for colors and spacing for Luxury Theme */
+:root {
+    --color-luxury-background: #fdfcf9; /* Very light, warm background */
+    --color-luxury-cream: #f9f6f3; /* Subtle cream */
+    --color-luxury-card: #ffffff; /* Pure white for cards */
+    --color-luxury-border: #eee7e2; /* Light, sophisticated border */
+    --color-luxury-primary: #8b5a2b; /* Rich, dark gold/brown for main accents */
+    --color-luxury-primary-dark: #6a4622; /* Even darker for hover */
+    --color-luxury-foreground: #222222; /* Deep dark text */
+    --color-luxury-muted-foreground: #555555; /* Muted darker text for descriptions */
+    --color-luxury-gold-accent: #d4af37; /* Classic gold for stars/accents */
+    --color-luxury-gold-light: #e0be6c; /* Lighter gold */
+    --color-luxury-blush: #fcf6f9; /* Very faint, warm pink for badges/highlights */
+
+    /* Reusing general spacing and border-radius from BudgetPackageDetails.css */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+    --spacing-3xl: 64px;
+    --spacing-4xl: 80px;
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 10px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+    /* RGB for primary for rgba calculations */
+    --color-luxury-primary-rgb: 139, 90, 43; /* RGB of #8b5a2b */
+    /* RGB for background for rgba calculations */
+    --color-luxury-background-rgb: 253, 252, 249; /* RGB of #fdfcf9 */
+    /* RGB for gold accent */
+    --color-luxury-gold-accent-rgb: 212, 175, 55; /* RGB of #d4af37 */
+}
+
+/* Base page styling */
+.luxury-package-details-page {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, var(--color-luxury-background), var(--color-luxury-cream));
+    font-family: 'Georgia', serif; /* A more elegant font choice */
+    color: var(--color-luxury-foreground);
+    line-height: 1.6;
+}
+
+/* Reusable container for content width */
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* Header (reusing structure, adapting colors) */
+.header-section {
+    background-color: var(--color-luxury-card);
+    border-bottom: 1px solid var(--color-luxury-border);
+    padding-top: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+}
+
+.back-link {
+    color: var(--color-luxury-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--color-luxury-primary-dark);
+}
+
+/* Hero Section (reusing structure, adapting colors/fonts) */
+.hero-section {
+    position: relative;
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-4xl);
+}
+
+.hero-grid {
+    display: grid;
+    /* Adjusted grid to always be a single column since image is removed */
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl); /* Maintain gap if other elements are added */
+    align-items: center;
+    justify-items: center; /* Center content in the single column */
+    text-align: center; /* Center text within the single column */
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-premium {
+    margin-bottom: var(--spacing-md);
+    background-color: var(--color-luxury-blush);
+    color: var(--color-luxury-primary);
+    border: 1px solid rgba(var(--color-luxury-primary-rgb), 0.2);
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    font-weight: bold;
+    color: var(--color-luxury-foreground);
+    margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 3.75rem;
+    }
+}
+
+.hero-description {
+    font-size: 1.3rem;
+    color: var(--color-luxury-muted-foreground);
+    margin-bottom: var(--spacing-2xl);
+}
+
+.price-rating-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-2xl);
+    justify-content: center; /* Center if content is centered */
+}
+
+.price-label {
+    font-size: 0.95rem;
+    color: var(--color-luxury-muted-foreground);
+}
+
+.hero-price {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--color-luxury-primary);
+}
+
+.rating-stars-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.star-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-luxury-gold-accent);
+    color: var(--color-luxury-gold-accent);
+}
+
+.rating-text {
+    font-size: 0.9rem;
+    color: var(--color-luxury-muted-foreground);
+    margin-left: var(--spacing-sm);
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+@media (min-width: 640px) {
+    .hero-buttons {
+        flex-direction: row;
+    }
+}
+
+/* Button styles (retained as they are used by the Link component too) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    font-size: 1.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    min-width: 180px;
+}
+
+.btn-luxury {
+    background-color: var(--color-luxury-primary);
+    color: white;
+    border: 1px solid transparent;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-luxury:hover {
+    background-color: var(--color-luxury-primary-dark);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.btn-bespoke {
+    background-color: transparent;
+    color: var(--color-luxury-primary);
+    border: 1px solid var(--color-luxury-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-bespoke:hover {
+    background-color: rgba(var(--color-luxury-primary-rgb), 0.08);
+    color: var(--color-luxury-primary-dark);
+    border-color: var(--color-luxury-primary-dark);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-lg {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    font-size: 1.25rem;
+}
+
+/* Section Header (reusable) */
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-3xl);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-luxury-foreground);
+    margin-bottom: var(--spacing-md);
+}
+
+.section-description {
+    font-size: 1.2rem;
+    color: var(--color-luxury-muted-foreground);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Features Section */
+.features-section {
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-4xl);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+}
+
+@media (min-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1024px) {
+    .features-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.feature-card {
+    background-color: var(--color-luxury-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+}
+
+.feature-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.feature-icon-wrapper {
+    color: var(--color-luxury-primary);
+    min-width: 24px;
+}
+
+.feature-icon {
+    width: 28px;
+    height: 28px;
+}
+
+.feature-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-luxury-foreground);
+    margin-bottom: var(--spacing-sm);
+}
+
+.feature-card-content {
+    flex-grow: 1;
+}
+
+.feature-card-description {
+    font-size: 1.05rem;
+    color: var(--color-luxury-muted-foreground);
+}
+
+/* Pricing Section (adapting colors/details) */
+.pricing-section {
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-4xl);
+}
+
+.pricing-container {
+    max-width: 900px;
+}
+
+.pricing-card {
+    background-color: var(--color-luxury-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding-bottom: var(--spacing-lg);
+}
+
+.pricing-card-header {
+    padding: var(--spacing-md);
+    padding-bottom: 0;
+}
+
+.pricing-card-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-luxury-foreground);
+    margin-bottom: var(--spacing-md);
+}
+
+.pricing-card-content {
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.pricing-list-items > div {
+    margin-bottom: var(--spacing-sm);
+}
+.pricing-list-items > div:last-child {
+    margin-bottom: 0;
+}
+
+.pricing-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-luxury-foreground);
+    font-size: 1.05rem;
+}
+
+.pricing-item-value {
+    font-weight: 600;
+    color: var(--color-luxury-primary);
+}
+
+.pricing-separator {
+    border: none;
+    border-top: 1px solid var(--color-luxury-border);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.pricing-separator-total {
+    border: none;
+    border-top: 2px dashed rgba(var(--color-luxury-primary-rgb), 0.3);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.pricing-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-luxury-primary);
+}
+
+.special-offer-box {
+    background-color: rgba(var(--color-luxury-gold-accent-rgb), 0.1);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    margin-top: var(--spacing-2xl);
+    border: 1px solid rgba(var(--color-luxury-gold-accent-rgb), 0.3);
+}
+
+.special-offer-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.special-offer-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-luxury-gold-accent);
+}
+
+.special-offer-title {
+    font-weight: 600;
+    color: var(--color-luxury-gold-accent);
+}
+
+.special-offer-text {
+    font-size: 0.95rem;
+    color: var(--color-luxury-foreground);
+}
+
+/* Testimonials Section (adapting colors/fonts) */
+.testimonials-section {
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-4xl);
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+}
+
+@media (min-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.testimonial-card {
+    background-color: var(--color-luxury-card);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xl);
+}
+
+.testimonial-stars {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.star-icon-small {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-luxury-gold-accent);
+    color: var(--color-luxury-gold-accent);
+}
+
+.testimonial-text {
+    color: var(--color-luxury-muted-foreground);
+    margin-bottom: var(--spacing-md);
+    font-style: italic;
+    font-size: 1.05rem;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    color: var(--color-luxury-foreground);
+}
+
+/* Responsive adjustments for overall layout */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .hero-title {
+        font-size: 2.25rem;
+    }
+    .hero-description {
+        font-size: 1.1rem;
+    }
+    .hero-price {
+        font-size: 2.75rem;
+    }
+    .section-title {
+        font-size: 2rem;
+    }
+    .section-description {
+        font-size: 1rem;
+    }
+    .btn-lg {
+        font-size: 1.1rem;
+        padding: 14px 28px;
+    }
+    .feature-card-title {
+        font-size: 1.1rem;
+    }
+    .feature-card-description {
+        font-size: 0.95rem;
+    }
+}
