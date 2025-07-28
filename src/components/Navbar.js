@@ -49,11 +49,7 @@ function Navbar() {
               Testimonials
             </Link>
           </li>
-          <li>
-            <Link to="/services" onClick={toggleMenu} className={location.pathname === "/services" ? "active" : ""}>
-              Services
-            </Link>
-          </li>
+         
         </ul>
 
         {/* Book Now button within the content wrapper */}
