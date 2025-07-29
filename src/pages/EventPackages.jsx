@@ -18,7 +18,8 @@ function EventPackages() {
         'Timeline to "I Do"',
         'Budget Tracker',
         'Guest List Manager (up to 50)',
-        'Local Vendor Directory'
+        'Local Vendor Directory',
+        'AI Planning Assistant (Instant Chat)'
       ],
       price: 'FREE',
       link: '/dashboard'
@@ -172,36 +173,7 @@ function EventPackages() {
       {/* Spacing between sections */}
       <div className="section-spacer"></div>
 
-      {/* Carousel Background Section */}
-      <section className="carousel-background-section">
-        <div className="carousel-background-container">
-          <ImageCarousel
-            images={carouselImages}
-            isBackground={false}
-            autoPlay={true}
-            interval={6000}
-            visibleItems={3}
-          />
-          <div className="carousel-content-overlay">
-            <div className="centered-content-card">
-              <h1 className="carousel-title">Thoughtfully Curated for Every Celebration</h1>
-              <p className="carousel-description">
-                At Jesah Events, we understand that no two celebrations are the same. Whether you're planning a romantic wedding,
-                a lavish birthday, a baby shower, or a sophisticated corporate gathering, we offer flexible packages designed
-                to suit your vision, needs, and budget.
-              </p>
-              <div className="carousel-cta-buttons">
-                <Link to="/weddings" className="btn primary-btn">
-                  Wedding Packages
-                </Link>
-                <Link to="/events" className="btn secondary-btn">
-                  All Event Types
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 }
