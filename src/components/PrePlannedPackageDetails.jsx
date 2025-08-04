@@ -45,7 +45,7 @@ const packagesData = {
     ],
     totalPrice: "$1,500",
     specialOfferText: "Book within the next 30 days and save $200! Final price: $1,300",
-    heroImage: "https://images.pexels.com/photos/17668392/pexels-photo-17668392/free-photo-of-man-in-white-suit-and-woman-in-white-dress-walking-on-street.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    heroImage: "https://i.pinimg.com/736x/6c/ae/f9/6caef9dd8fae6216ff47e4cdfab7f254.jpg",
     testimonials: [
       {
         name: "Sarah & Michael",

@@ -12,7 +12,7 @@ function Footer() {
         {/* Column 1: Brand Info */}
         <div className="footer-col brand-info">
           <Link to="/" className="footer-logo">
-            <img src="https://i.pinimg.com/736x/1f/e3/9d/1fe39d0dfda5f3bc84026700fef1149d.jpg" alt="Jesah Events Logo" />
+            <img src="./Jesa events Logo.jpg" alt="Jesah Events Logo" />
           </Link>
           <p className="brand-slogan">Crafting unforgettable moments, from vision to breathtaking reality.</p>
           <p className="copyright">&copy; {new Date().getFullYear()} Jesah Events. All rights reserved.</p>

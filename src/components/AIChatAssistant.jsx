@@ -21,6 +21,7 @@ function AIChatAssistant() {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
   const [planId, setPlanId] = useState(null); // To store the ID of the saved plan
+  const [saveStatus, setSaveStatus] = useState(''); // New state for save status
 
   const questions = [
     { id: 'date', label: 'Preferred Wedding Date or Time of Year (e.g., "next summer", "Dec 2025"):', placeholder: 'e.g., "next summer", "Dec 2025"' },
@@ -38,7 +39,6 @@ function AIChatAssistant() {
     }));
   };
 
-  // NEW FUNCTION: Parses the AI's checklist string into a structured array
   const parseChecklist = (fullPlanText) => {
     const checklistSectionRegex = /## 9\. Comprehensive Wedding Planning Checklist\n\n([\s\S]*?)(?=\n\n##|$)/;
     const checklistMatch = fullPlanText.match(checklistSectionRegex);
@@ -49,24 +49,51 @@ function AIChatAssistant() {
     }
 
     const checklistContent = checklistMatch[1];
-    // Regex to match items like "- [TYPE] Task: Detail."
     const itemRegex = /^- \[(\w+)\] (.+?): (.+)$/gm;
     let match;
     const parsedItems = [];
 
     while ((match = itemRegex.exec(checklistContent)) !== null) {
-      const type = match[1]; // ESSENTIAL or RECOMMENDED
+      const type = match[1];
       const task = match[2];
       const description = match[3];
       parsedItems.push({
-        id: Date.now() + Math.random().toString(36).substring(2, 9), // Simple unique ID for now
+        id: Date.now() + Math.random().toString(36).substring(2, 9),
         type: type.toUpperCase(),
         task,
         description,
-        isCompleted: false, // Default to not completed
+        isCompleted: false,
       });
     }
     return parsedItems;
+  };
+
+  // NEW FUNCTION: Handle saving the plan explicitly
+  const handleSavePlan = async () => {
+    if (!aiPlan || planId) { // Only save if a plan exists and hasn't been saved explicitly yet
+      setSaveStatus('Plan already saved or no plan to save.');
+      setTimeout(() => setSaveStatus(''), 3000);
+      return;
+    }
+
+    setSaveStatus('Saving...');
+    try {
+      const parsedChecklist = parseChecklist(aiPlan); // Ensure checklist is parsed before saving
+      const docRef = await addDoc(collection(db, "weddingPlans"), {
+        formData: formData,
+        aiPlanFullText: aiPlan,
+        checklist: parsedChecklist,
+        createdAt: new Date(),
+      });
+      setPlanId(docRef.id);
+      setSaveStatus('Plan saved successfully!');
+      console.log("Document explicitly saved with ID: ", docRef.id);
+      setTimeout(() => setSaveStatus(''), 3000);
+    } catch (err) {
+      console.error('Error saving plan:', err);
+      setSaveStatus('Failed to save plan.');
+      setTimeout(() => setSaveStatus(''), 3000);
+    }
   };
 
 
@@ -76,6 +103,7 @@ function AIChatAssistant() {
     setAiPlan(''); // Clear previous plan when submitting a new one
     setCopied(false); // Reset copied state
     setPlanId(null); // Reset plan ID
+    setSaveStatus(''); // Reset save status
 
     for (const key in formData) {
       if (!formData[key].trim()) {
@@ -108,34 +136,34 @@ function AIChatAssistant() {
       const generatedPlan = data.response;
       setAiPlan(generatedPlan);
 
-      // --- NEW: Parse checklist and save to Firestore ---
+      // Automatically save to Firestore upon successful generation
       const parsedChecklist = parseChecklist(generatedPlan);
-
       const docRef = await addDoc(collection(db, "weddingPlans"), {
         formData: formData,
         aiPlanFullText: generatedPlan,
-        checklist: parsedChecklist, // Save the parsed checklist
+        checklist: parsedChecklist,
         createdAt: new Date(),
       });
       console.log("Document written with ID: ", docRef.id);
-      setPlanId(docRef.id); // Store the ID for potential future use (e.g., retrieving later)
-      // --- END NEW ---
+      setPlanId(docRef.id); // Store the ID for display
+      setSaveStatus('Plan generated and saved!'); // Indicate automatic save
+      setTimeout(() => setSaveStatus(''), 3000); // Clear message after 3 seconds
 
     } catch (err) {
       console.error('Error generating plan:', err);
       setError(`Error: ${err.message || 'Could not generate the wedding plan. Please try again.'}`);
+      setSaveStatus('Generation failed, plan not saved.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Function to copy plan to clipboard
   const copyPlanToClipboard = () => {
     if (aiPlan) {
       navigator.clipboard.writeText(aiPlan)
         .then(() => {
           setCopied(true);
-          setTimeout(() => setCopied(false), 2000); // Reset "Copied!" message after 2 seconds
+          setTimeout(() => setCopied(false), 2000);
         })
         .catch((err) => {
           console.error('Failed to copy text: ', err);
@@ -143,7 +171,6 @@ function AIChatAssistant() {
     }
   };
 
-  // Function to reset the form and plan
   const startNewPlan = () => {
     setFormData({
       date: '',
@@ -156,12 +183,12 @@ function AIChatAssistant() {
     setError('');
     setCopied(false);
     setIsLoading(false);
-    setPlanId(null); // Clear plan ID on new plan
+    setPlanId(null);
+    setSaveStatus(''); // Clear save status on new plan
   };
 
   return (
     <div className="ai-main-wrapper">
-      {/* ... (rest of your component JSX, unchanged for now) ... */}
       {/* Form Card */}
       <div className="ai-card ai-form-card">
         <h3>AI Wedding Planning Assistant</h3>
@@ -197,12 +224,22 @@ function AIChatAssistant() {
         </div>
       )}
 
-      {/* AI Response Content (NOT a card) */}
+      {/* AI Response Content */}
       {aiPlan && (
         <div className="ai-plan-content-block">
           <div className="ai-plan-header">
             <h4>Your Personalized Wedding Plan:</h4>
             <div className="plan-actions">
+              {/* "Save to My Plans" button */}
+              {!planId && ( // Show only if a plan is generated but not yet explicitly saved (or if initial save failed)
+                <button
+                  onClick={handleSavePlan}
+                  className="action-button primary-action"
+                  disabled={isLoading}
+                >
+                  Save to My Plans
+                </button>
+              )}
               <button onClick={copyPlanToClipboard} className="action-button primary-action" disabled={copied}>
                 {copied ? 'Copied!' : 'Copy Plan'}
               </button>
@@ -211,6 +248,15 @@ function AIChatAssistant() {
               </button>
             </div>
           </div>
+
+          {/* Display Plan ID and Save Status */}
+          {planId && (
+            <p className="plan-info">
+              **Plan ID:** <span className="plan-id-text">{planId}</span> (You can use this to retrieve your plan later!)
+            </p>
+          )}
+          {saveStatus && <p className="save-status-message">{saveStatus}</p>}
+
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiPlan}</ReactMarkdown>
         </div>
       )}

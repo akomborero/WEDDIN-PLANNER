@@ -14,7 +14,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-logo">
         {/* Replace with your logo file path and alt text */}
-        <img src="/your-logo.png" alt="Company Logo" height="40" />
+        <img src="./Jesa events Logo.jpg" alt="Company Logo" height="40" />
       </div>
 
       {/* Hamburger Menu Icon (will be visible on small screens) */}

@@ -70,7 +70,7 @@ const OurStoryPage = () => {
                         </div>
                         <div className="promise-image-column">
                             {/* Placeholder image. REMEMBER TO REPLACE THIS WITH YOUR ACTUAL IMAGE PATH. */}
-                            <img src="https://i.pinimg.com/1200x/04/f5/60/04f5605ac68011c59980d5f5942b8b1b.jpg" alt="Our Promise" className="promise-img" />
+                            <img src="./Jesa events Logo.jpg" alt="Our Promise" className="promise-img" />
                         </div>
                     </div>
                 </div>
