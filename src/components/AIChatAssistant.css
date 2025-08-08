@@ -1,68 +1,88 @@
-/* client/src/components/AIChatAssistant.css */
+/*
+========================================
+    AI Chat Assistant Styles
+========================================
+*/
 
-/* Basic body styling for overall app feel (should largely match index.css now) */
-/* This block is largely for consistency and if this component is used standalone. */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f9f7f6; /* Very light, warm background */
-    color: #333;
-    line-height: 1.6;
-    /* Margin, padding, display, etc., are primarily controlled by index.css body rules */
+:root {
+    /* Colors */
+    --primary-color: #8a4a58;
+    --primary-color-dark: #6d3a44;
+    --secondary-color: #f0f0f0;
+    --background-color-light: #f9f7f6;
+    --card-background-color: #ffffff;
+    --text-color-dark: #333;
+    --text-color-medium: #555;
+    --text-color-light: #666;
+    --border-color-light: #ddd;
+    --border-color-lighter: #e0e0e0;
+    --border-color-subtle: #eee;
+    --error-color: #d9534f;
+    --error-background: #fce8e6;
+    --success-color: #4CAF50;
+    --warning-color: #ffb300;
+    --warning-background: #fffde7;
+
+    /* Spacing & Sizing */
+    --card-padding: 40px;
+    --main-gap: 30px;
+    --border-radius: 12px;
+    --button-border-radius: 8px;
+    --input-padding: 12px;
+    --transition-speed: 0.3s;
 }
 
 /* Main wrapper for the two blocks (form card and plan content) */
 .ai-main-wrapper {
-    display: flex; /* Use flexbox to arrange items */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within its max-width */
-    width: 100%; /* Take full width of its parent (body padding) */
-    max-width: 1200px; /* Overall max width for the content area */
-    margin: 40px auto; /* Center the wrapper and add top margin */
-    gap: 30px; /* Space between the two main blocks */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: var(--main-gap);
     box-sizing: border-box;
 }
 
-/* General Card Styling - ONLY applied to the form card now */
+/* General Card Styling */
 .ai-card {
-    background-color: #ffffff; /* White background for the card */
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
-    padding: 40px;
-    width: 100%; /* The card takes full width of its wrapper */
+    background-color: var(--card-background-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: var(--card-padding);
+    width: 100%;
     box-sizing: border-box;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added hover transition */
+    transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
 }
 
-/* Optional: Subtle hover effect for cards */
 .ai-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-/* Specific adjustments for the form card if needed */
-.ai-form-card {
-    /* No specific styles needed here unless different from .ai-card defaults */
-}
-
-/* Headings within cards (e.g., "AI Wedding Planning Assistant") */
-.ai-card h3 {
+/* Headings within cards and plan content */
+.ai-card h3,
+.ai-card > p,
+.ai-plan-content-block h4 {
     text-align: center;
-    color: #8a4a58; /* A nice dusty rose/burgundy color */
-    font-size: 2.2em;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
     letter-spacing: 0.05em;
-    font-weight: 600;
 }
 
-/* Introductory paragraph within cards */
-.ai-card > p { /* Targets direct p children of .ai-card */
-    text-align: center;
-    color: #666;
+.ai-card h3 {
+    color: var(--primary-color);
+    font-size: 2.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.ai-card > p {
+    color: var(--text-color-light);
     font-size: 1.1em;
     margin-bottom: 30px;
 }
 
-/* Form Styling - Refinements */
+/* Form Styling */
 .ai-planner-form .form-group {
     margin-bottom: 25px;
 }
@@ -70,147 +90,137 @@ body {
 .ai-planner-form label {
     display: block;
     font-size: 1.05em;
-    color: #555;
+    color: var(--text-color-medium);
     margin-bottom: 8px;
     font-weight: 500;
-    position: relative; /* For potential future label animation */
 }
 
-.ai-planner-form input[type="text"] {
-    width: calc(100% - 24px); /* Account for padding */
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+.ai-planner-form input {
+    width: calc(100% - var(--input-padding) * 2);
+    padding: var(--input-padding);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--button-border-radius);
     font-size: 1em;
-    color: #333;
-    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smoother transition */
+    color: var(--text-color-dark);
+    transition: border-color var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
-.ai-planner-form input[type="text"]:focus {
-    border-color: #a07d86; /* Accent color on focus */
-    box-shadow: 0 0 0 4px rgba(160, 125, 134, 0.25); /* Slightly stronger glow */
+.ai-planner-form input:focus {
+    border-color: #a07d86;
+    box-shadow: 0 0 0 4px rgba(160, 125, 134, 0.25);
     outline: none;
 }
 
-/* Submission Button Styling */
-.ai-planner-form button[type="submit"] {
-    display: block;
-    width: 100%;
+/* Buttons */
+.ai-planner-form button[type="submit"],
+.action-button {
     padding: 15px 25px;
-    background-color: #8a4a58; /* Main accent color */
-    color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--button-border-radius);
     font-size: 1.15em;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 10px rgba(138, 74, 88, 0.2);
+}
+
+.ai-planner-form button[type="submit"] {
+    display: block;
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--card-background-color);
     margin-top: 30px;
     letter-spacing: 0.03em;
-    box-shadow: 0 4px 10px rgba(138, 74, 88, 0.2); /* Added shadow for submit button */
 }
 
 .ai-planner-form button[type="submit"]:hover:not(:disabled) {
-    background-color: #6d3a44; /* Darker shade on hover */
-    transform: translateY(-2px); /* Slight lift effect */
-    box-shadow: 0 6px 12px rgba(138, 74, 88, 0.3); /* Enhanced shadow on hover */
+    background-color: var(--primary-color-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(138, 74, 88, 0.3);
 }
 
-.ai-planner-form button[type="submit"]:disabled {
+.ai-planner-form button[type="submit"]:disabled,
+.action-button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
     opacity: 0.7;
     box-shadow: none;
 }
 
-/* Error Message Styling */
 .error-message {
-    color: #d9534f; /* Red for errors */
-    background-color: #fce8e6;
-    border: 1px solid #d9534f;
+    color: var(--error-color);
+    background-color: var(--error-background);
+    border: 1px solid var(--error-color);
     padding: 10px;
-    border-radius: 8px;
+    border-radius: var(--button-border-radius);
     margin-top: 20px;
     font-size: 0.95em;
     text-align: center;
 }
 
-/* Loading Indicator */
 .loading-indicator {
     text-align: center;
     margin-top: 30px;
-    color: #8a4a58;
+    color: var(--primary-color);
     font-size: 1.1em;
     font-style: italic;
     font-weight: 500;
 }
 
-/* NEW: AI Response Content Block Styling (NOT a card) */
+/* AI Response Content Block */
 .ai-plan-content-block {
-    width: 100%; /* Take full width of its parent (.ai-main-wrapper) */
-    padding: 30px 40px; /* Add some padding for content readability */
+    width: 100%;
+    padding: 30px 40px;
     box-sizing: border-box;
-    /* No background-color, border-radius, or box-shadow to make it NOT a card */
 }
 
-/* AI Response Header (title and action buttons) */
-.ai-plan-content-block .ai-plan-header { /* Target header inside new block */
+.ai-plan-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee; /* Retain border for separation */
+    border-bottom: 1px solid var(--border-color-subtle);
     padding-bottom: 10px;
 }
 
-.ai-plan-content-block .ai-plan-header h4 { /* Target h4 inside new block */
+.ai-plan-header h4 {
     margin: 0;
-    color: #8a4a58;
+    color: var(--primary-color);
     font-size: 1.6em;
     font-weight: 600;
 }
 
 .plan-actions {
     display: flex;
-    gap: 15px; /* Space between buttons */
+    gap: 15px;
 }
 
 .action-button {
     padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
     font-size: 0.95em;
     font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    display: flex; /* For potential icon alignment */
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .primary-action {
-    background-color: #8a4a58; /* Main accent color */
+    background-color: var(--primary-color);
     color: #fff;
     box-shadow: 0 4px 10px rgba(138, 74, 88, 0.2);
 }
 
 .primary-action:hover:not(:disabled) {
-    background-color: #6d3a44;
+    background-color: var(--primary-color-dark);
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(138, 74, 88, 0.3);
 }
 
-.primary-action:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
 .secondary-action {
-    background-color: #f0f0f0; /* Lighter background */
-    color: #555;
-    border: 1px solid #ddd;
+    background-color: var(--secondary-color);
+    color: var(--text-color-medium);
+    border: 1px solid var(--border-color-light);
 }
 
 .secondary-action:hover:not(:disabled) {
@@ -219,28 +229,67 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Copied message styling */
 .primary-action[disabled].copied {
-    background-color: #4CAF50; /* Green for copied */
+    background-color: var(--success-color);
     color: white;
     box-shadow: none;
     cursor: default;
-    pointer-events: none; /* Prevent further clicks while message is active */
+    pointer-events: none;
 }
 
-/* Styling for Markdown rendered content within the AI response (now inside .ai-plan-content-block) */
-.ai-plan-content-block p {
-    margin-bottom: 1em;
-    color: #444;
+.plan-info {
+    font-size: 0.9em;
+    color: var(--text-color-medium);
+    margin-bottom: 20px;
 }
 
+.plan-id-text {
+    font-weight: 600;
+    color: var(--primary-color-dark);
+}
+
+.save-status-message {
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+/* Booking form styling */
+.booking-form-card {
+    /* No additional styling needed, it uses the base .ai-card styles */
+}
+
+.booking-info {
+    background-color: #f5f5f5;
+    border-radius: var(--button-border-radius);
+    padding: 20px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color-light);
+}
+
+.booking-info p {
+    margin: 0 0 8px 0;
+    font-size: 1em;
+    color: var(--text-color-dark);
+}
+
+.booking-status {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--primary-color-dark);
+}
+
+/* Markdown rendered content */
 .ai-plan-content-block h1,
 .ai-plan-content-block h2,
 .ai-plan-content-block h3,
 .ai-plan-content-block h4,
 .ai-plan-content-block h5,
 .ai-plan-content-block h6 {
-    color: #6d3a44; /* Darker accent for headings within the plan */
+    color: var(--primary-color-dark);
     margin-top: 1.5em;
     margin-bottom: 0.8em;
     font-weight: 600;
@@ -250,109 +299,55 @@ body {
 .ai-plan-content-block ol {
     margin-left: 25px;
     margin-bottom: 1em;
-    list-style-type: disc; /* Default for ul */
-}
-
-.ai-plan-content-block ol {
-    list-style-type: decimal;
 }
 
 .ai-plan-content-block li {
     margin-bottom: 0.5em;
-    color: #444;
+    color: var(--text-color-dark);
 }
 
-/* Table Specific Styling for Markdown Output (now inside .ai-plan-content-block) */
 .ai-plan-content-block table {
     width: 100%;
-    border-collapse: collapse; /* Removes space between table cells */
+    border-collapse: collapse;
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: #fcfcfc; /* Keep a light background for tables */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Keep a subtle shadow for tables */
-    border-radius: 8px;
-    overflow: hidden; /* Ensures rounded corners apply to content */
+    background-color: #fcfcfc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: var(--button-border-radius);
+    overflow: hidden;
 }
 
 .ai-plan-content-block th,
 .ai-plan-content-block td {
-    border: 1px solid #e0e0e0; /* Light border for cells */
+    border: 1px solid var(--border-color-lighter);
     padding: 12px 15px;
     text-align: left;
-    color: #444;
+    color: var(--text-color-dark);
     font-size: 0.95em;
 }
 
 .ai-plan-content-block th {
-    background-color: #f0f0f0; /* Light header background */
+    background-color: #f0f0f0;
     font-weight: 600;
-    color: #666;
+    color: var(--text-color-light);
     text-transform: uppercase;
     font-size: 0.9em;
     letter-spacing: 0.03em;
 }
 
 .ai-plan-content-block tr:nth-child(even) {
-    background-color: #f8f8f8; /* Zebra striping for rows */
+    background-color: #f8f8f8;
 }
 
 .ai-plan-content-block tr:hover {
-    background-color: #eef5f5; /* Subtle hover effect on rows */
+    background-color: #eef5f5;
 }
 
-/* Checklist Styling (now inside .ai-plan-content-block) */
-.ai-plan-content-block .checklist {
-    margin-top: 25px;
-    margin-bottom: 30px;
-    padding-left: 0;
-    list-style: none;
-}
-
-.ai-plan-content-block .checklist li {
-    background-color: #fcfdff; /* Light background for checklist items */
-    border: 1px solid #e9e9e9;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    padding: 15px 20px;
-    display: flex; /* For potential icon/checkbox alignment */
-    align-items: flex-start;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    font-size: 0.98em;
-    color: #333;
-    line-height: 1.5;
-    position: relative; /* For badges */
-}
-
-/* Style for Essential items within the checklist */
-.ai-plan-content-block .checklist li strong:first-child { /* Targets the [Essential] or [Recommended] tag */
-    display: inline-block;
-    padding: 3px 8px;
-    border-radius: 5px;
-    margin-right: 10px;
-    font-size: 0.85em;
-    font-weight: 700;
-    text-transform: uppercase;
-    white-space: nowrap; /* Prevent tag from wrapping */
-}
-
-.ai-plan-content-block .checklist li strong:first-child[data-tag="essential"] { /* Custom data attribute to target specific tag */
-    background-color: #ffebee; /* Light red background */
-    color: #d32f2f; /* Darker red text */
-    border: 1px solid #ef9a9a;
-}
-
-.ai-plan-content-block .checklist li strong:first-child[data-tag="recommended"] {
-    background-color: #e8f5e9; /* Light green background */
-    color: #388e3c; /* Darker green text */
-    border: 1px solid #a5d6a7;
-}
-
-/* Style for the warning text itself */
 .ai-plan-content-block .warning-text {
-    background-color: #fffde7;
-    border: 1px solid #ffe082;
+    background-color: var(--warning-background);
+    border: 1px solid var(--warning-color);
     padding: 15px;
-    border-radius: 8px;
+    border-radius: var(--button-border-radius);
     margin-top: 20px;
     margin-bottom: 25px;
     color: #616161;
@@ -362,108 +357,76 @@ body {
 }
 
 .ai-plan-content-block .warning-text strong {
-    color: #ffb300;
+    color: var(--warning-color);
 }
-
-.ai-plan-content-block .checklist li::before {
-    content: '\2610'; /* Unicode checkbox (empty) */
-    font-size: 1.2em;
-    color: #a0a0a0;
-    margin-right: 10px;
-    flex-shrink: 0; /* Don't let it shrink */
-}
-
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    :root {
+        --card-padding: 25px;
+        --main-gap: 20px;
+    }
     .ai-main-wrapper {
-        padding: 0 10px; /* Reduce horizontal padding on wrapper */
+        padding: 0 10px;
         margin-top: 20px;
-        gap: 20px; /* Adjust gap between blocks */
+        gap: var(--main-gap);
     }
-    .ai-card {
-        padding: 25px;
-    }
-
     .ai-card h3 {
         font-size: 1.8em;
     }
-
     .ai-planner-form button[type="submit"] {
         padding: 12px 20px;
         font-size: 1.05em;
     }
-
     .ai-plan-content-block {
-        padding: 25px; /* Reduce padding on smaller screens */
+        padding: var(--card-padding);
     }
-
-    .ai-plan-content-block .ai-plan-header {
+    .ai-plan-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-
-    .ai-plan-content-block .ai-plan-header h4 {
+    .ai-plan-header h4 {
         font-size: 1.4em;
     }
-
-    .ai-plan-content-block .plan-actions {
+    .plan-actions {
         flex-direction: row;
         width: 100%;
         justify-content: flex-start;
         gap: 10px;
     }
-
-    .ai-plan-content-block .action-button {
+    .action-button {
         padding: 8px 15px;
         font-size: 0.9em;
         flex-grow: 1;
     }
-
     .ai-plan-content-block th,
     .ai-plan-content-block td {
         padding: 10px 12px;
         font-size: 0.9em;
     }
-
-    .ai-plan-content-block .checklist li {
-        padding: 12px 15px;
-        font-size: 0.9em;
-    }
-    .ai-plan-content-block .checklist li strong:first-child {
-        padding: 2px 6px;
-        font-size: 0.8em;
-        margin-right: 8px;
-    }
-    .ai-plan-content-block .warning-text {
-        padding: 12px;
-        font-size: 0.9em;
-    }
 }
 
 @media (max-width: 480px) {
+    :root {
+        --card-padding: 15px;
+        --main-gap: 15px;
+        --input-padding: 10px;
+    }
     body {
         padding: 10px;
     }
     .ai-main-wrapper {
         margin-top: 10px;
-        gap: 15px;
-    }
-    .ai-card {
-        padding: 15px;
+        gap: var(--main-gap);
     }
     .ai-card h3 {
         font-size: 1.5em;
     }
-    .ai-planner-form input[type="text"] {
-        padding: 10px;
-        font-size: 0.95em;
-    }
     .ai-plan-content-block {
-        padding: 15px;
+        padding: var(--card-padding);
     }
-    .ai-plan-content-block .plan-actions {
+    .plan-actions {
         flex-direction: column;
         gap: 8px;
     }

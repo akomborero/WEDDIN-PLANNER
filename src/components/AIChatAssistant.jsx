@@ -1,5 +1,3 @@
-// client/src/components/AIChatAssistant.jsx
-
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -212,14 +210,14 @@ function AIChatAssistant() {
     });
   };
 
-  // **NEW: Function to handle booking submission**
   const handleBookNow = async () => {
+    if (!planId) {
+        setBookingStatus('Please wait for the plan to be saved before booking, or generate a new plan.');
+        return; // Stop the function here
+    }
+
     setBookingStatus('Submitting booking...');
     try {
-      if (!planId) {
-        throw new Error('No plan ID available to book.');
-      }
-      
       const response = await fetch('http://localhost:5000/api/book-wedding', {
         method: 'POST',
         headers: {
@@ -306,10 +304,10 @@ function AIChatAssistant() {
               <button onClick={startNewPlan} className="action-button secondary-action">
                 Start New Plan
               </button>
-              {/* **NEW: Book Now button** */}
               <button 
                 onClick={() => setShowBookingForm(true)} 
                 className="action-button primary-action"
+                disabled={!planId} // Ensure plan is saved before booking
               >
                 Book Now
               </button>
@@ -327,7 +325,7 @@ function AIChatAssistant() {
         </div>
       )}
 
-      {/* **NEW: Booking Form Component** */}
+      {/* Booking Form Component */}
       {showBookingForm && (
         <div className="ai-card booking-form-card">
           <h3>Book Your Wedding</h3>
