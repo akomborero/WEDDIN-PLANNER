@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import './AIChatAssistant.css';
-import { db } from '../firebaseConfig'; // Import your Firestore instance
-import { collection, addDoc } from 'firebase/firestore'; // Import Firestore functions
+import { db } from '../firebaseConfig';
+import { collection, addDoc } from 'firebase/firestore';
 
 function AIChatAssistant() {
   const [formData, setFormData] = useState({
@@ -20,8 +20,17 @@ function AIChatAssistant() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
-  const [planId, setPlanId] = useState(null); // To store the ID of the saved plan
-  const [saveStatus, setSaveStatus] = useState(''); // New state for save status
+  const [planId, setPlanId] = useState(null);
+  const [saveStatus, setSaveStatus] = useState('');
+
+  // **NEW: State for booking functionality**
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [bookingStatus, setBookingStatus] = useState('');
 
   const questions = [
     { id: 'date', label: 'Preferred Wedding Date or Time of Year (e.g., "next summer", "Dec 2025"):', placeholder: 'e.g., "next summer", "Dec 2025"' },
@@ -36,6 +45,15 @@ function AIChatAssistant() {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [id]: value,
+    }));
+  };
+
+  // **NEW: Handler for booking form inputs**
+  const handleBookingChange = (e) => {
+    const { name, value } = e.target;
+    setBookingDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
     }));
   };
 
@@ -68,9 +86,8 @@ function AIChatAssistant() {
     return parsedItems;
   };
 
-  // NEW FUNCTION: Handle saving the plan explicitly
   const handleSavePlan = async () => {
-    if (!aiPlan || planId) { // Only save if a plan exists and hasn't been saved explicitly yet
+    if (!aiPlan || planId) {
       setSaveStatus('Plan already saved or no plan to save.');
       setTimeout(() => setSaveStatus(''), 3000);
       return;
@@ -78,7 +95,7 @@ function AIChatAssistant() {
 
     setSaveStatus('Saving...');
     try {
-      const parsedChecklist = parseChecklist(aiPlan); // Ensure checklist is parsed before saving
+      const parsedChecklist = parseChecklist(aiPlan);
       const docRef = await addDoc(collection(db, "weddingPlans"), {
         formData: formData,
         aiPlanFullText: aiPlan,
@@ -96,14 +113,15 @@ function AIChatAssistant() {
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setAiPlan(''); // Clear previous plan when submitting a new one
-    setCopied(false); // Reset copied state
-    setPlanId(null); // Reset plan ID
-    setSaveStatus(''); // Reset save status
+    setAiPlan('');
+    setCopied(false);
+    setPlanId(null);
+    setSaveStatus('');
+    setShowBookingForm(false); // Hide booking form on new submission
+    setBookingStatus(''); // Clear booking status
 
     for (const key in formData) {
       if (!formData[key].trim()) {
@@ -145,9 +163,9 @@ function AIChatAssistant() {
         createdAt: new Date(),
       });
       console.log("Document written with ID: ", docRef.id);
-      setPlanId(docRef.id); // Store the ID for display
-      setSaveStatus('Plan generated and saved!'); // Indicate automatic save
-      setTimeout(() => setSaveStatus(''), 3000); // Clear message after 3 seconds
+      setPlanId(docRef.id);
+      setSaveStatus('Plan generated and saved!');
+      setTimeout(() => setSaveStatus(''), 3000);
 
     } catch (err) {
       console.error('Error generating plan:', err);
@@ -184,7 +202,50 @@ function AIChatAssistant() {
     setCopied(false);
     setIsLoading(false);
     setPlanId(null);
-    setSaveStatus(''); // Clear save status on new plan
+    setSaveStatus('');
+    setShowBookingForm(false);
+    setBookingStatus('');
+    setBookingDetails({
+      name: '',
+      email: '',
+      phone: '',
+    });
+  };
+
+  // **NEW: Function to handle booking submission**
+  const handleBookNow = async () => {
+    setBookingStatus('Submitting booking...');
+    try {
+      if (!planId) {
+        throw new Error('No plan ID available to book.');
+      }
+      
+      const response = await fetch('http://localhost:5000/api/book-wedding', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          planId: planId,
+          ...bookingDetails,
+          ...formData, // Include original form data for context
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Booking failed.');
+      }
+
+      const data = await response.json();
+      setBookingStatus('Booking successful! We will contact you shortly.');
+      console.log('Booking successful:', data);
+      setTimeout(() => setBookingStatus(''), 5000);
+
+    } catch (error) {
+      console.error('Booking error:', error);
+      setBookingStatus(`Booking failed: ${error.message}`);
+    }
   };
 
   return (
@@ -225,13 +286,12 @@ function AIChatAssistant() {
       )}
 
       {/* AI Response Content */}
-      {aiPlan && (
+      {aiPlan && !showBookingForm && (
         <div className="ai-plan-content-block">
           <div className="ai-plan-header">
             <h4>Your Personalized Wedding Plan:</h4>
             <div className="plan-actions">
-              {/* "Save to My Plans" button */}
-              {!planId && ( // Show only if a plan is generated but not yet explicitly saved (or if initial save failed)
+              {!planId && (
                 <button
                   onClick={handleSavePlan}
                   className="action-button primary-action"
@@ -246,10 +306,16 @@ function AIChatAssistant() {
               <button onClick={startNewPlan} className="action-button secondary-action">
                 Start New Plan
               </button>
+              {/* **NEW: Book Now button** */}
+              <button 
+                onClick={() => setShowBookingForm(true)} 
+                className="action-button primary-action"
+              >
+                Book Now
+              </button>
             </div>
           </div>
 
-          {/* Display Plan ID and Save Status */}
           {planId && (
             <p className="plan-info">
               **Plan ID:** <span className="plan-id-text">{planId}</span> (You can use this to retrieve your plan later!)
@@ -258,6 +324,60 @@ function AIChatAssistant() {
           {saveStatus && <p className="save-status-message">{saveStatus}</p>}
 
           <ReactMarkdown remarkPlugins={[remarkGfm]}>{aiPlan}</ReactMarkdown>
+        </div>
+      )}
+
+      {/* **NEW: Booking Form Component** */}
+      {showBookingForm && (
+        <div className="ai-card booking-form-card">
+          <h3>Book Your Wedding</h3>
+          <p>Please confirm your details to book this wedding plan.</p>
+          
+          <div className="form-group">
+            <label>Full Name</label>
+            <input 
+              type="text" 
+              name="name" 
+              value={bookingDetails.name} 
+              onChange={handleBookingChange} 
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Email Address</label>
+            <input 
+              type="email" 
+              name="email" 
+              value={bookingDetails.email} 
+              onChange={handleBookingChange} 
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Phone Number</label>
+            <input 
+              type="tel" 
+              name="phone" 
+              value={bookingDetails.phone} 
+              onChange={handleBookingChange} 
+              required 
+            />
+          </div>
+
+          <div className="booking-info">
+            <p><strong>Date:</strong> {formData.date}</p>
+            <p><strong>Guests:</strong> {formData.guests}</p>
+            <p><strong>Location:</strong> {formData.location}</p>
+            <p>A copy of your full plan is attached to this booking request.</p>
+          </div>
+          
+          <button onClick={handleBookNow} className="action-button primary-action">
+            Confirm Booking
+          </button>
+          <button onClick={() => setShowBookingForm(false)} className="action-button secondary-action">
+            Cancel
+          </button>
+          {bookingStatus && <p className="booking-status">{bookingStatus}</p>}
         </div>
       )}
     </div>
